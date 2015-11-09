@@ -22,9 +22,6 @@ public class IUTScheduler {
 		    public void run() {
 		        JFrame mainFrame = new edu.iut.gui.frames.SchedulerFrame("IUT Scheduler");
 		        mainFrame.setVisible(true);
-		        
-		        AgendaPanelFactory factory=new AgendaPanelFactory();
-		        ControlAgendaViewPanel factoryControl=new ControlAgendaViewPanel(new CardLayout(), new JPanel());
 		    }
 		});
 	}
