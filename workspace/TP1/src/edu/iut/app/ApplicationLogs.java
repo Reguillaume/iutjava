@@ -37,5 +37,4 @@ public class ApplicationLogs extends ArrayList<IApplicationLog> {
 		}
 		return infosLog;
 	}
-	
 }
