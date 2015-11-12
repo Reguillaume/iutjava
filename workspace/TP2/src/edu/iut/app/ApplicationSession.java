@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 
 public class ApplicationSession {
 	
-	// Exercice 1 : Gérer l'internationation
+	// Exercice 1 : Gï¿½rer l'internationation
 	protected ResourceBundle resourceBundle;
 	protected Locale locale;
 	
@@ -22,7 +22,7 @@ public class ApplicationSession {
 		Locale.setDefault(new Locale("US"));
 		
 		locale = Locale.getDefault();
-		resourceBundle = ResourceBundle.getBundle("edu/iut/resources/strings", locale);
+		resourceBundle = ResourceBundle.getBundle("edu/iut/resources/strings/res", locale);
 		sessionGuiLogger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME); 
 		sessionGuiLogger.setLevel(Level.ALL);
 		sessionExceptionLogger = Logger.getAnonymousLogger();
