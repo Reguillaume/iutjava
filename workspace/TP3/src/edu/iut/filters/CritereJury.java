@@ -3,8 +3,10 @@ package edu.iut.filters;
 import java.util.ArrayList;
 
 import edu.iut.app.ExamEvent;
+import edu.iut.app.Person;
 
-public class CritereStudent implements Critere {
+public class CritereJury implements Critere {
+	
 	private String nom;
 	private String prenom;
 	
@@ -13,7 +15,9 @@ public class CritereStudent implements Critere {
 		ArrayList<ExamEvent> newEx=new ArrayList<ExamEvent>();
 		
 		for(ExamEvent e : ex) {
-			if(e.getStudent().getFirstname()==prenom && e.getStudent().getLastname()==nom) newEx.add(e);
+			for(Person p : e.getJury()) {
+				if(p.getFirstname()==prenom && p.getLastname()==nom) newEx.add(e);
+			}
 		}
 		return newEx;
 	}
@@ -25,5 +29,4 @@ public class CritereStudent implements Critere {
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
-
 }
