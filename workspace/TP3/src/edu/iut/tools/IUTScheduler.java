@@ -4,6 +4,8 @@ import java.util.Locale;
 
 import edu.iut.app.CommandLineOption;
 import edu.iut.app.CommandLineParser;
+import edu.iut.menu.MenuBar;
+
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
@@ -19,6 +21,9 @@ public class IUTScheduler {
 		SwingUtilities.invokeLater(new Runnable() {
 		    public void run() {
 		        JFrame mainFrame = new edu.iut.gui.frames.SchedulerFrame("IUT Scheduler");
+		        MenuBar barFrame=new MenuBar();
+		        mainFrame.setJMenuBar(barFrame);
+		        
 		        mainFrame.setVisible(true);		        
 		    }
 		});
