@@ -6,7 +6,6 @@ public class Document {
 		documentURI="";
 	}
 	public Document(String documentURI) {
-		/* EX2 : Affectation */
 		this.documentURI=documentURI;
 	}
 	
