@@ -1,10 +1,5 @@
 package edu.iut.gui.widget.agenda;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import edu.iut.gui.widget.agenda.WeekPanel.WeekDayNames;

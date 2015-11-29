@@ -1,7 +1,6 @@
 package edu.iut.gui.widget.agenda;
 
 import java.awt.GridLayout;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 

@@ -74,15 +74,25 @@ public class SchedulerFrame extends JFrame {
 		
 		JMenu helpMenu=new JMenu("Help");
 		
-		JMenuItem diplayItem=new JMenuItem("Display");
+		JMenuItem displayItem=new JMenuItem("Display");
 		JMenuItem aboutItem=new JMenuItem("About");
 		
-		helpMenu.add(diplayItem);
+		helpMenu.add(displayItem);
 		helpMenu.add(aboutItem);
 		
 		menuBar.add(helpMenu);
 		
 		setJMenuBar(menuBar);
+		
+		ControlSchedulerFrame control=new ControlSchedulerFrame(this);
+		loadItem.addActionListener(control);
+		saveItem.addActionListener(control);
+		quitItem.addActionListener(control);
+		monthItem.addActionListener(control);
+		dayItem.addActionListener(control);
+		weekItem.addActionListener(control);
+		displayItem.addActionListener(control);
+		aboutItem.addActionListener(control);
 	}
 	
 	public SchedulerFrame() {
@@ -111,4 +121,7 @@ public class SchedulerFrame extends JFrame {
 		setupUI();
 	}
 	
+	public void afficherMonth() { layerLayout.show(contentPane, ActiveView.MONTH_VIEW.name());}
+	public void afficherDay() { layerLayout.show(contentPane, ActiveView.DAY_VIEW.name());}
+	public void afficherWeek() { layerLayout.show(contentPane, ActiveView.WEEK_VIEW.name());}
 }
