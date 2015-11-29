@@ -3,6 +3,7 @@ package edu.iut.filters;
 import java.util.ArrayList;
 
 import edu.iut.app.ExamEvent;
+import edu.iut.filters.Critere;;
 
 public class CritereStudent implements Critere {
 	private String nom;

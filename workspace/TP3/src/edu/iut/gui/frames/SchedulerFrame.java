@@ -1,8 +1,6 @@
 package edu.iut.gui.frames;
 
 import java.awt.CardLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -10,7 +8,6 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
@@ -44,21 +41,48 @@ public class SchedulerFrame extends JFrame {
 	
 		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,agendaViewPanel, contentPane);
 		this.setContentPane(splitPane);
-		
-		JMenuBar menuBar = new JMenuBar();
-		JMenu menu;		
-		JMenuItem menuItem;
-		
-		/* File Menu */
-		/** EX4 : MENU : UTILISER L'AIDE FOURNIE DANS LE TP**/
-		
-		
-		menu = new JMenu("File");
-		
-		
-		this.setJMenuBar(menuBar);
 		this.pack();
 		layerLayout.next(contentPane);
+		
+		JMenuBar menuBar=new JMenuBar();
+		
+		JMenu fileMenu=new JMenu("File");
+		
+		JMenuItem loadItem=new JMenuItem("Load");
+		JMenuItem saveItem=new JMenuItem("Save");
+		JMenuItem quitItem=new JMenuItem("Quit");
+		
+		fileMenu.add(loadItem);
+		fileMenu.add(saveItem);
+		fileMenu.add(quitItem);
+		
+		menuBar.add(fileMenu);
+		
+		JMenu editMenu=new JMenu("Edit");
+		
+		JMenu viewMenu=new JMenu("View");
+		JMenuItem monthItem=new JMenuItem("Month");
+		JMenuItem weekItem=new JMenuItem("Week");
+		JMenuItem dayItem=new JMenuItem("Day");
+		
+		viewMenu.add(monthItem);
+		viewMenu.add(weekItem);
+		viewMenu.add(dayItem);
+		editMenu.add(viewMenu);
+		
+		menuBar.add(editMenu);
+		
+		JMenu helpMenu=new JMenu("Help");
+		
+		JMenuItem diplayItem=new JMenuItem("Display");
+		JMenuItem aboutItem=new JMenuItem("About");
+		
+		helpMenu.add(diplayItem);
+		helpMenu.add(aboutItem);
+		
+		menuBar.add(helpMenu);
+		
+		setJMenuBar(menuBar);
 	}
 	
 	public SchedulerFrame() {
@@ -75,8 +99,8 @@ public class SchedulerFrame extends JFrame {
 		monthView = null;
 		agendaPanelFactory = null;
 		setupUI();
-
 	}
+	
 	public SchedulerFrame(String title) {
 		super(title);
 		addWindowListener (new WindowAdapter(){
