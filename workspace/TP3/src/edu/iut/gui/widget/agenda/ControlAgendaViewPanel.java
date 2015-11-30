@@ -1,22 +1,25 @@
 package edu.iut.gui.widget.agenda;
 
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.GridLayout;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.Locale;
-import java.util.Map;
-import java.util.spi.CalendarNameProvider;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
-import edu.iut.app.Agenda;
 import edu.iut.app.ApplicationSession;
-import edu.iut.gui.widget.agenda.AgendaPanelFactory.ActiveView;
-import edu.iut.gui.widget.agenda.WeekPanel.WeekDayNames;
+import edu.iut.app.ExamEvent;
+import edu.iut.gui.frames.VueExam;
 
 public class ControlAgendaViewPanel extends JPanel {
 
@@ -46,12 +49,37 @@ public class ControlAgendaViewPanel extends JPanel {
 		else comboDays.setSelectedIndex(todayDay-1);
 		
 		comboMonth.setSelectedIndex(cal.get(Calendar.MONTH));
-			
-		this.add(comboDays);
-		this.add(comboMonth);
-		this.add(spinnerDate);
+		
+		setLayout(new BorderLayout());
+		
+		JPanel controlPanel=new JPanel(new GridLayout(1, 3));
+		controlPanel.add(comboDays);
+		controlPanel.add(comboMonth);
+		controlPanel.add(spinnerDate);
+		this.add(controlPanel, BorderLayout.NORTH);
 		
 		//ExamEvent+List
+		JPanel gridExam=new JPanel(new BorderLayout());
+		
+		ArrayList<ExamEvent> examModel=new ArrayList<>();
+		DefaultListModel<String> examListModel=new DefaultListModel<>();
+		for(ExamEvent e : ModelAgenda.instance()) {
+			examModel.add(e);
+			examListModel.addElement(e.getStudent().getLastname().toUpperCase()+" "+e.getStudent().getFirstname());
+		}
+		JList<String> examList=new JList<>(examListModel);
+		gridExam.add(examList, BorderLayout.WEST);
+		examList.addListSelectionListener(new ListSelectionListener() {
+			
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				gridExam.add(new VueExam(examModel.get(examList.getSelectedIndex())), BorderLayout.CENTER);
+				gridExam.repaint();
+				gridExam.revalidate();
+			}
+		});
+		
+		this.add(gridExam, BorderLayout.CENTER);
 		
 	}
 	
