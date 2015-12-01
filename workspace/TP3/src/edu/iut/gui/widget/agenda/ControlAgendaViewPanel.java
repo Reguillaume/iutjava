@@ -3,14 +3,18 @@ package edu.iut.gui.widget.agenda;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
@@ -46,7 +50,7 @@ public class ControlAgendaViewPanel extends JPanel {
 		cal.setTime(new Date());
 		int todayDay=cal.get(Calendar.DAY_OF_WEEK);
 		if(todayDay==1) comboDays.setSelectedIndex(6);
-		else comboDays.setSelectedIndex(todayDay-1);
+		else comboDays.setSelectedIndex(todayDay-2);
 		
 		comboMonth.setSelectedIndex(cal.get(Calendar.MONTH));
 		
@@ -73,14 +77,46 @@ public class ControlAgendaViewPanel extends JPanel {
 			
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
-				gridExam.add(new VueExam(examModel.get(examList.getSelectedIndex())), BorderLayout.CENTER);
-				gridExam.repaint();
-				gridExam.revalidate();
+				if(!examList.isSelectionEmpty()) {
+					gridExam.add(new VueExam(examModel.get(examList.getSelectedIndex())), BorderLayout.CENTER);
+					gridExam.repaint();
+					gridExam.revalidate();
+				}
 			}
 		});
-		
 		this.add(gridExam, BorderLayout.CENTER);
 		
+		//Boutons
+		JPanel buttonsPanel=new JPanel(new GridLayout(1, 2));
+		JButton supprimerButton=new JButton("Supprimer");
+		supprimerButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(!examList.isSelectionEmpty()) {
+					if(JOptionPane.showConfirmDialog(null, "Êtes-vous sûr de vouloir supprimer l'examen de "+examList.getSelectedValue()+" ?", "Confirmation", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
+						examModel.remove(examList.getSelectedIndex());
+						ModelAgenda.instance().remove(examList.getSelectedIndex());
+						examListModel.remove(examList.getSelectedIndex());
+						examList.setModel(examListModel);
+						gridExam.add(new JPanel(), BorderLayout.CENTER);
+						gridExam.repaint();
+						gridExam.revalidate();
+					}
+				}
+			}
+		});
+		JButton creerButton=new JButton("Créer");
+		creerButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null,  "La fonction 'Créer' n'est pas encore gérée.", "Erreur", JOptionPane.INFORMATION_MESSAGE);
+			}
+		});
+		buttonsPanel.add(creerButton);
+		buttonsPanel.add(supprimerButton);
+		this.add(buttonsPanel, BorderLayout.SOUTH);
 	}
 	
 	public int getYear() {
