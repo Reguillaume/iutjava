@@ -2,6 +2,7 @@ package edu.iut.gui.widget.vue;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.ArrayList;
@@ -12,9 +13,11 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.plaf.basic.BasicToolBarUI.DockingListener;
 
 import edu.iut.app.Classroom;
 import edu.iut.app.Document;
@@ -28,13 +31,15 @@ import edu.iut.gui.modele.ModelePerson;
 import edu.iut.gui.widget.agenda.ModelAgenda;
 
 public class VueCreerExam extends JPanel {
+	private JTabbedPane onglets;
+	
 	private DefaultListModel<String> examModel=new DefaultListModel<>();
 	private JList<String> examList=new JList<String>(examModel);
 	private ArrayList<ExamEvent> examArray=new ArrayList<ExamEvent>();
 	
 	//Liste
 	private JPanel descPanel=new JPanel();
-	private JTextField rechercherField=new JTextField();
+	private JTextField rechercherExamField=new JTextField();
 	private JButton rechercherButton=new JButton("Rechercher");
 	private JButton ajouterButton=new JButton("Ajouter");
 	private JButton modifierButton=new JButton("Modifier");
@@ -53,10 +58,12 @@ public class VueCreerExam extends JPanel {
 	private JButton ajouterSelectButton=new JButton(">>");
 	private JButton enleverSelectButton=new JButton("<<");
 	//Etudiant
+	private JTextField rechercherEtudiantField=new JTextField();
 	private DefaultListModel<String> etudiantModel=new DefaultListModel<String>();
 	private JList<String> etudiantList=new JList<>(etudiantModel);
 	private ArrayList<Person> etudiantArray=new ArrayList<>();
 	//Jury
+	private JTextField rechercherJuryField=new JTextField();
 	private DefaultListModel<String> allJuryModel=new DefaultListModel<>();
 	private JList<String> allJuryList=new JList<String>(allJuryModel);
 	private ArrayList<Person> allJuryArray=new ArrayList<>();
@@ -64,10 +71,12 @@ public class VueCreerExam extends JPanel {
 	private JList<String> selectJuryList=new JList<String>(selectJuryModel);
 	private ArrayList<Person> selectJuryArray=new ArrayList<>();
 	//Classroom
+	private JTextField rechercherClassroomField=new JTextField();
 	private DefaultListModel<String> classroomModel=new DefaultListModel<>();
 	private JList<String> classroomList=new JList<String>(classroomModel);
 	private ArrayList<Classroom> classroomArray=new ArrayList<>();
 	//Document
+	private JTextField rechercherDocumentField=new JTextField();
 	private DefaultListModel<String> allDocumentModel=new DefaultListModel<>();
 	private JList<String> allDocumentList=new JList<String>(allDocumentModel);
 	private ArrayList<Document> allDocumentArray=new ArrayList<>();
@@ -80,14 +89,14 @@ public class VueCreerExam extends JPanel {
 	
 	private String currentPanel=null;
 	
-	public VueCreerExam() {
+	public VueCreerExam(JTabbedPane onglets) {
+		this.onglets=onglets;
+		
 		//LISTE
 		
 		JPanel examListePanel=new JPanel(new BorderLayout());
 		//panel rechercher
-		rechercherPanel=new JPanel(new BorderLayout());
-		rechercherPanel.add(rechercherField, BorderLayout.CENTER);
-		rechercherPanel.add(rechercherButton, BorderLayout.EAST);
+		initialiserFormulairePanel("creer");
 		//panel liste+desc
 		JPanel listePanel=new JPanel(new GridLayout(1,2));
 		listePanel.add(examList);
@@ -125,7 +134,7 @@ public class VueCreerExam extends JPanel {
 		
 		//CHOISIR ETUDIANT
 		JPanel choixEtudiantPanel=new JPanel(new BorderLayout());
-		initialiserFormulairePanel();
+		initialiserFormulairePanel("selectEtudiant");
 		//Liste
 		JPanel etudiantListPanel=new JPanel(new BorderLayout());
 		etudiantListPanel.add(rechercherPanel, BorderLayout.NORTH);
@@ -144,7 +153,7 @@ public class VueCreerExam extends JPanel {
 		//CHOISIR JURY
 		JPanel choixJuryPanel=new JPanel(new BorderLayout());
 		initialiserButtonsSelectPanel();
-		initialiserFormulairePanel();
+		initialiserFormulairePanel("selectJury");
 		//Liste
 		JPanel juryListPanel=new JPanel(new GridLayout(1, 3));
 		JPanel allJuryListPanel=new JPanel(new BorderLayout());
@@ -168,7 +177,7 @@ public class VueCreerExam extends JPanel {
 		
 		//CHOISIR CLASSROOM
 		JPanel choixClassroomPanel=new JPanel(new BorderLayout());
-		initialiserFormulairePanel();
+		initialiserFormulairePanel("selectClassroom");
 		//Liste
 		JPanel classroomListPanel=new JPanel(new BorderLayout());
 		classroomListPanel.add(rechercherPanel, BorderLayout.NORTH);
@@ -187,7 +196,7 @@ public class VueCreerExam extends JPanel {
 		//CHOISIR DOCUMENT
 		JPanel choixDocumentPanel=new JPanel(new BorderLayout());
 		initialiserButtonsSelectPanel();
-		initialiserFormulairePanel();
+		initialiserFormulairePanel("selectDocument");
 		//Liste
 		JPanel documentListPanel=new JPanel(new GridLayout(1, 3));
 		JPanel allDocumentListPanel=new JPanel(new BorderLayout());
@@ -246,13 +255,24 @@ public class VueCreerExam extends JPanel {
 	
 	public void initialiserJuryList() {
 		allJuryArray.clear();
-		allDocumentModel.clear();
+		allJuryModel.clear();
 		selectJuryModel.clear();
 		selectJuryArray.clear();
 		for(Person p : ModelePerson.instance()) {
 			if(p.getFunction().equals(PersonFunction.JURY)) {
 				allJuryModel.addElement(p.getLastname()+" "+p.getFirstname());
 				allJuryArray.add(p);
+			}
+		}
+	}
+	
+	public void initialiserAllJuryList() {
+		allJuryArray.clear();
+		allJuryModel.clear();
+		for(Person person : ModelePerson.instance()) {
+			if(person.getFunction().equals(PersonFunction.JURY)) {
+				allJuryArray.add(person);
+				allJuryModel.addElement(person.getLastname()+" "+person.getFirstname());
 			}
 		}
 	}
@@ -274,6 +294,15 @@ public class VueCreerExam extends JPanel {
 		for(Document d : ModeleDocument.instance()) {
 			allDocumentModel.addElement(d.getDocumentURI());
 			allDocumentArray.add(d);
+		}
+	}
+	
+	public void initialiserAllDocumentList() {
+		allDocumentArray.clear();
+		allDocumentModel.clear();
+		for(Document document : ModeleDocument.instance()) {
+			allDocumentArray.add(document);
+			allDocumentModel.addElement(document.getDocumentURI());
 		}
 	}
 	
@@ -302,10 +331,27 @@ public class VueCreerExam extends JPanel {
 		initialiserEtudiantList();
 	}
 	
+	public void showEtudiantSelect(Person p) {
+		gestionnaire.show(this, "selectEtudiant");
+		currentPanel="selectEtudiant";
+		initialiserEtudiantList();
+		etudiantList.setSelectedIndex(etudiantArray.indexOf(p));
+	}
+
 	public void showJurySelect() {
 		gestionnaire.show(this, "selectJury");
 		currentPanel="selectJury";
 		initialiserJuryList();
+	}
+	
+	public void showJurySelect(ArrayList<Person> p) {
+		gestionnaire.show(this, "selectJury");
+		currentPanel="selectJury";
+		initialiserJuryList();
+		for(Person person : p) {
+			selectJuryModel.addElement(person.getLastname()+" "+person.getFirstname());
+			selectJuryArray.add(person);
+		}
 	}
 	
 	public void showClassroomSelect() {
@@ -314,10 +360,27 @@ public class VueCreerExam extends JPanel {
 		initialiserClassroomList();
 	}
 	
+	public void showClassroomSelect(Classroom c) {
+		gestionnaire.show(this, "selectClassroom");
+		currentPanel="selectClassroom";
+		initialiserClassroomList();
+		classroomList.setSelectedIndex(classroomArray.indexOf(c));
+	}
+	
 	public void showDocumentSelect() {
 		gestionnaire.show(this, "selectDocument");
 		currentPanel="selectDocument";
 		initialiserDocumentList();
+	}
+	
+	public void showDocumentSelect(ArrayList<Document> d) {
+		gestionnaire.show(this, "selectDocument");
+		currentPanel="selectDocument";
+		initialiserDocumentList();
+		for(Document document : d) {
+			selectDocumentModel.addElement(document.getDocumentURI());
+			selectDocumentArray.add(document);
+		}
 	}
 	
 	public void ajouterSelectJury() {
@@ -348,7 +411,7 @@ public class VueCreerExam extends JPanel {
 		}
 	}
 	
-	public void initialiserFormulairePanel() {
+	public void initialiserFormulairePanel(String panel) {
 		retourButton=new JButton("Retour");
 		suivantButton=new JButton("Suivant");
 		quitterButton=new JButton("<");
@@ -361,10 +424,8 @@ public class VueCreerExam extends JPanel {
 		buttonsChoixPanel.add(retourButton);
 		buttonsChoixPanel.add(suivantButton);
 		
-		rechercherField=new JTextField();
 		rechercherButton=new JButton("Rechercher");
 		rechercherPanel=new JPanel(new BorderLayout());
-		rechercherPanel.add(rechercherField, BorderLayout.CENTER);
 		rechercherPanel.add(rechercherButton, BorderLayout.EAST);
 		
 		ControlCreerExam control=new ControlCreerExam(this);
@@ -373,6 +434,24 @@ public class VueCreerExam extends JPanel {
 		quitterButton.addActionListener(control);
 		rechercherButton.addActionListener(control);
 		rafraichirButton.addActionListener(control);
+		
+		switch(panel) {
+		case "creer" :
+			rechercherPanel.add(rechercherExamField, BorderLayout.CENTER);
+			break;
+		case "selectEtudiant" :
+			rechercherPanel.add(rechercherEtudiantField, BorderLayout.CENTER);
+			break;
+		case "selectJury" :
+			rechercherPanel.add(rechercherJuryField, BorderLayout.CENTER);
+			break;
+		case "selectClassroom" :
+			rechercherPanel.add(rechercherClassroomField, BorderLayout.CENTER);
+			break;
+		case "selectDocument" :
+			rechercherPanel.add(rechercherDocumentField, BorderLayout.CENTER);
+			break;
+		}
 	}
 	
 	public void initialiserButtonsSelectPanel() {
@@ -389,6 +468,108 @@ public class VueCreerExam extends JPanel {
 		ControlCreerExam control=new ControlCreerExam(this);
 		ajouterSelectButton.addActionListener(control);
 		enleverSelectButton.addActionListener(control);
+	}
+	
+	public void goCreerEtudiantTab() {
+		onglets.setSelectedIndex(1);
+		((VueTabPerson) onglets.getSelectedComponent()).getFonctionBox().setSelectedIndex(1);;
+		((VueTabPerson) onglets.getSelectedComponent()).creerPage();
+	}
+	
+	public void goCreerJuryTab() {
+		onglets.setSelectedIndex(1);
+		((VueTabPerson) onglets.getSelectedComponent()).getFonctionBox().setSelectedIndex(0);;
+		((VueTabPerson) onglets.getSelectedComponent()).creerPage();
+	}
+	
+	public void goCreerClassroomTab() {
+		onglets.setSelectedIndex(2);
+	}
+	
+	public void goCreerDocumentTab() {
+		onglets.setSelectedIndex(3);
+	}
+	
+	public void rechercherExam() {
+		if(!rechercherExamField.getText().replace(" ", "").equals("")) {
+			examArray.clear();
+			examModel.clear();
+			for(ExamEvent event : ModelAgenda.instance()) {
+				if(rechercherExamField.getText().replace(" " , "").equals(event.getStudent().getLastname())) {
+					examArray.add(event);
+					examModel.addElement(event.getStudent().getLastname()+" "+event.getStudent().getFirstname());
+				}
+			}
+		}
+		else {
+			descPanel.removeAll();
+			rafraichir();
+			initialiserExamList();
+		}
+	}
+	
+	public void rechercherEtudiant() {
+		if(!rechercherEtudiantField.getText().replace(" ", "").equals("")) {
+			etudiantArray.clear();
+			etudiantModel.clear();
+			for(Person person : ModelePerson.instance()) {
+				if(rechercherEtudiantField.getText().replace(" " , "").equals(person.getLastname()) && person.getFunction().equals(PersonFunction.STUDENT)) {
+					etudiantArray.add(person);
+					etudiantModel.addElement(person.getLastname()+" "+person.getFirstname());
+				}
+			}
+		}
+		else {
+			initialiserEtudiantList();
+		}
+	}
+	
+	public void rechercherJury() {
+		if(!rechercherJuryField.getText().replace(" ", "").equals("")) {
+			allJuryArray.clear();
+			allJuryModel.clear();
+			for(Person person : ModelePerson.instance()) {
+				if(rechercherJuryField.getText().replace(" " , "").equals(person.getLastname()) && person.getFunction().equals(PersonFunction.JURY)) {
+					allJuryArray.add(person);
+					allJuryModel.addElement(person.getLastname()+" "+person.getFirstname());
+				}
+			}
+		}
+		else {
+			initialiserAllJuryList();
+		}
+	}
+	
+	public void rechercherClassroom() {
+		if(!rechercherClassroomField.getText().replace(" ", "").equals("")) {
+			classroomArray.clear();
+			classroomModel.clear();
+			for(Classroom classroom : ModeleClassroom.instance()) {
+				if(rechercherClassroomField.getText().replace(" " , "").equals(classroom.getClassRoomNumber())) {
+					classroomArray.add(classroom);
+					classroomModel.addElement(classroom.getClassRoomNumber());
+				}
+			}
+		}
+		else {
+			initialiserClassroomList();
+		}
+	}
+	
+	public void rechercherDocument() {
+		if(!rechercherDocumentField.getText().replace(" ", "").equals("")) {
+			allDocumentArray.clear();
+			allDocumentModel.clear();
+			for(Document document : ModeleDocument.instance()) {
+				if(rechercherDocumentField.getText().replace(" " , "").equals(document.getDocumentURI())) {
+					allDocumentArray.add(document);
+					allDocumentModel.addElement(document.getDocumentURI());
+				}
+			}
+		}
+		else {
+			initialiserAllDocumentList();
+		}
 	}
 	
 	public Person getSelectEtudiant() {
@@ -422,4 +603,9 @@ public class VueCreerExam extends JPanel {
 	public void setQuitterButton(JButton quitterButton) {
 		this.quitterButton = quitterButton;
 	}
+	
+	public ArrayList<ExamEvent> getExamArray() {
+		return examArray;
+	}
+
 }

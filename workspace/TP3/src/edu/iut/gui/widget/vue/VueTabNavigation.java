@@ -11,6 +11,7 @@ import javax.swing.JComboBox;
 
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
+import javax.swing.JTabbedPane;
 import javax.swing.SpinnerNumberModel;
 
 import edu.iut.app.ApplicationSession;
@@ -20,7 +21,7 @@ public class VueTabNavigation extends JPanel {
 	private JComboBox<String> monthCombo;
 	private JSpinner dateSpinner;
 	
-	public VueTabNavigation() {
+	public VueTabNavigation(JTabbedPane onglets) {
 		//Spinner+ComboBox
 		SpinnerNumberModel spinnerModelDate=new SpinnerNumberModel(2015, 2010, 2020, 1);
 		dateSpinner=new JSpinner(spinnerModelDate);
@@ -45,7 +46,7 @@ public class VueTabNavigation extends JPanel {
 		controlPanel.add(dateSpinner);
 		this.add(controlPanel, BorderLayout.NORTH);
 		
-		VueCreerExam creerExamPanel=new VueCreerExam();
+		VueCreerExam creerExamPanel=new VueCreerExam(onglets);
 		add(creerExamPanel);
 	}
 }

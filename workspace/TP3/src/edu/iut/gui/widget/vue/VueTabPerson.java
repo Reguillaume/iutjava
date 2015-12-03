@@ -182,7 +182,6 @@ public class VueTabPerson extends JPanel {
 		personArray.clear();
 		personModel.clear();
 		if(!(rechercherField.getText().equals(""))) {
-			System.out.print("lol");
 			for(Person p : ModelePerson.instance()) {
 				if(p.getLastname().equals(rechercherField.getText().replace(" ", ""))) {
 					personArray.add(p);

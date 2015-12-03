@@ -9,7 +9,7 @@ public class VueTabbed extends JPanel {
 	public VueTabbed() {
 		onglets=new JTabbedPane();
 		
-		VueTabNavigation navigationTab=new VueTabNavigation();
+		VueTabNavigation navigationTab=new VueTabNavigation(onglets);
 		onglets.addTab("Navigation", navigationTab);
 		
 		VueTabPerson personTab=new VueTabPerson();

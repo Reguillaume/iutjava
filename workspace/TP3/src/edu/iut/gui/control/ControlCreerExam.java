@@ -3,6 +3,7 @@ package edu.iut.gui.control;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
+import java.util.PrimitiveIterator.OfDouble;
 
 import javax.swing.JOptionPane;
 
@@ -12,6 +13,7 @@ import edu.iut.gui.widget.vue.VueCreerExam;
 
 public class ControlCreerExam implements ActionListener {
 	private VueCreerExam vue;
+	private static int modification;
 	
 	public ControlCreerExam(VueCreerExam vue) {
 		this.vue=vue;
@@ -20,40 +22,67 @@ public class ControlCreerExam implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		switch(e.getActionCommand()) {
+		case "Modifier" :
+			if(!vue.getExamList().isSelectionEmpty()) {
+				modification=vue.getExamList().getSelectedIndex();
+				vue.showDocumentSelect(vue.getExamArray().get(modification).getDocuments());
+				vue.showClassroomSelect(vue.getExamArray().get(modification).getClassroom());
+				vue.showJurySelect(vue.getExamArray().get(modification).getJury());
+				vue.showEtudiantSelect(vue.getExamArray().get(modification).getStudent());
+			}
+			break;
 		case "Ajouter" :
 			vue.showEtudiantSelect();
 			break;
 		case "Suivant" :
 			switch(vue.getCurrentPanel()) {
 			case "selectEtudiant" :
-				vue.showJurySelect();
+				if(modification!=-1) vue.showJurySelect(vue.getExamArray().get(modification).getJury());
+				else vue.showJurySelect();
 				break;
 			case "selectJury" :
-				vue.showClassroomSelect();
+				if(modification!=-1) vue.showClassroomSelect(vue.getExamArray().get(modification).getClassroom());
+				else vue.showClassroomSelect();
 				break;
 			case "selectClassroom" :
-				vue.showDocumentSelect();
+				if(modification!=-1) vue.showDocumentSelect(vue.getExamArray().get(modification).getDocuments());
+				else vue.showDocumentSelect();
 				break;
 			}
 			break;
 		case "Retour" :
 			switch(vue.getCurrentPanel()) {
 			case "selectEtudiant" :
-				vue.showExamList();
+				if(modification!=-1) {
+					if(JOptionPane.showConfirmDialog(null, "Les modifications ne seront pas enregistrées, êtes-vous sûr ?", "Confirmation", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
+						modification=-1;
+						vue.showExamList();
+					}
+				}
+				else vue.showExamList();
 				break;
 			case "selectJury" :
-				vue.showEtudiantSelect();
+				if(modification!=-1) vue.showEtudiantSelect(vue.getExamArray().get(modification).getStudent());
+				else vue.showEtudiantSelect();
 				break;
 			case "selectClassroom" :
-				vue.showJurySelect();
+				if(modification!=-1) vue.showJurySelect(vue.getExamArray().get(modification).getJury());
+				else vue.showJurySelect();
 				break;
 			case "selectDocument" :
-				vue.showClassroomSelect();
+				if(modification!=-1) vue.showClassroomSelect(vue.getExamArray().get(modification).getClassroom());
+				else vue.showClassroomSelect();
 				break;
 			}
 			break;
 		case "<" :
-			vue.showExamList();
+			if(modification!=-1) {
+				if(JOptionPane.showConfirmDialog(null, "Les modifications ne seront pas enregistrées, êtes-vous sûr ?", "Confirmation", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
+					modification=-1;
+					vue.showExamList();
+				}
+			}
+			else vue.showExamList();
 			break;
 		case ">>" :
 			switch(vue.getCurrentPanel()) {
@@ -76,13 +105,23 @@ public class ControlCreerExam implements ActionListener {
 			}
 			break;
 		case "Supprimer" :
-			vue.supprimerSelectionListe();
+			if(JOptionPane.showConfirmDialog(null, "Êtes vous sur de vouloir supprimer l'examen de "+vue.getExamList().getSelectedValue(), "Confirmation", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
+				vue.supprimerSelectionListe();
+			}
 			break;
 		case "Créer" :
-			if(JOptionPane.showConfirmDialog(null, "Êtes-vous sûr de vouloir créer l'examen ?", "Confirmation", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
-				vue.initialiserExamList();
-				ExamEvent exam=new ExamEvent(new Date(), vue.getSelectEtudiant(), vue.getSelectJury(), vue.getSelectClassroom(), vue.getSelectDocument());
+			ExamEvent exam=new ExamEvent(new Date(), vue.getSelectEtudiant(), vue.getSelectJury(), vue.getSelectClassroom(), vue.getSelectDocument());
+			if(modification!=-1) {
+				if(JOptionPane.showConfirmDialog(null, "Êtes-vous sûr de vouloir modifier l'examen ?", "Confirmation", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
+					ModelAgenda.instance().remove(vue.getExamArray().get(modification));
+					ModelAgenda.instance().add(exam);
+					vue.initialiserExamList();
+					vue.showExamList();
+				}
+			}
+			else if(JOptionPane.showConfirmDialog(null, "Êtes-vous sûr de vouloir créer l'examen ?", "Confirmation", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
 				ModelAgenda.instance().add(exam);
+				vue.initialiserExamList();
 				vue.showExamList();
 			}
 			break;
@@ -99,6 +138,38 @@ public class ControlCreerExam implements ActionListener {
 				break;
 			case "selectDocument" :
 				vue.initialiserDocumentList();
+				break;
+			}
+			break;
+		case "Créer un étudiant" :
+			vue.goCreerEtudiantTab();
+			break;
+		case "Créer un jury" :
+			vue.goCreerJuryTab();
+			break;
+		case "Créer une salle" :
+			vue.goCreerClassroomTab();
+			break;
+		case "Créer un document" :
+			vue.goCreerDocumentTab();
+			break;
+		case "Rechercher" :
+			System.out.print("lol");
+			switch(vue.getCurrentPanel()) {
+			case "creer" :
+				vue.rechercherExam();
+				break;
+			case "selectEtudiant" :
+				vue.rechercherEtudiant();
+				break;
+			case "selectJury" :
+				vue.rechercherJury();
+				break;
+			case "selectClassroom" :
+				vue.rechercherClassroom();
+				break;
+			case "selectDocument" :
+				vue.rechercherDocument();
 				break;
 			}
 			break;

@@ -28,7 +28,7 @@ public class VueExam extends JPanel {
 		//JURYS
 		JPanel juryBorderPanel=new JPanel(new BorderLayout());
 		juryBorderPanel.add(new JLabel("JURYS"), BorderLayout.NORTH);
-		JPanel juryGridPanel=new JPanel(new GridLayout(exam.getJury().size(), 1, 5, 5));
+		JPanel juryGridPanel=new JPanel(new GridLayout(exam.getJury().size(), 1));
 		for(Person j : exam.getJury()) juryGridPanel.add(new VuePerson(j));
 		juryBorderPanel.add(juryGridPanel, BorderLayout.CENTER);
 		
@@ -48,7 +48,7 @@ public class VueExam extends JPanel {
 		docBorderPanel.add(docGridPanel, BorderLayout.CENTER);
 		
 		//MISE EN FORME
-		setLayout(new GridLayout(5, 1, 10, 10));
+		setLayout(new GridLayout(5, 1));
 		add(dateBorderPanel);
 		add(studentBorderPanel);
 		add(juryBorderPanel);
