@@ -23,10 +23,11 @@ public class Person {
 	}
 	
 	public Person(PersonFunction personFunction,
-				  String firstname,
 				  String lastname,
+				  String firstname,
 				  String email,
 				  String phone) {
+		this.personFunction=personFunction;
 		this.firstname=firstname;
 		this.lastname=lastname;
 		this.email=email;
