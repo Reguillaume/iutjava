@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
 
@@ -20,6 +21,7 @@ public class VueTabNavigation extends JPanel {
 	private JComboBox<String> daysCombo;
 	private JComboBox<String> monthCombo;
 	private JSpinner dateSpinner;
+	private JComboBox<Integer> numDaysCombo;
 	
 	public VueTabNavigation(JTabbedPane onglets) {
 		//Spinner+ComboBox
@@ -38,9 +40,16 @@ public class VueTabNavigation extends JPanel {
 		
 		monthCombo.setSelectedIndex(cal.get(Calendar.MONTH));
 		
+		DefaultComboBoxModel<Integer> numDaysModel=new DefaultComboBoxModel<>();
+		for(int i=1; i<=cal.getActualMaximum(Calendar.DAY_OF_MONTH); i++) {
+			numDaysModel.addElement(i);
+		}
+		numDaysCombo=new JComboBox<Integer>(numDaysModel);
+		
 		setLayout(new BorderLayout());
 		
-		JPanel controlPanel=new JPanel(new GridLayout(1, 3));
+		JPanel controlPanel=new JPanel(new GridLayout(1, 4));
+		controlPanel.add(numDaysCombo);
 		controlPanel.add(daysCombo);
 		controlPanel.add(monthCombo);
 		controlPanel.add(dateSpinner);
