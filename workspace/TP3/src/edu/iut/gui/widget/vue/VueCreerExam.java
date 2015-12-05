@@ -28,7 +28,7 @@ import edu.iut.gui.control.ControlCreerExam;
 import edu.iut.gui.modele.ModeleClassroom;
 import edu.iut.gui.modele.ModeleDocument;
 import edu.iut.gui.modele.ModelePerson;
-import edu.iut.gui.widget.agenda.ModelAgenda;
+import edu.iut.gui.modele.ModeleExam;
 
 public class VueCreerExam extends JPanel {
 	private JTabbedPane onglets;
@@ -236,7 +236,7 @@ public class VueCreerExam extends JPanel {
 	public void initialiserExamList() {
 		examArray.clear();
 		examModel.clear();
-		for(ExamEvent e : ModelAgenda.instance()) {
+		for(ExamEvent e : ModeleExam.instance()) {
 			examModel.addElement(e.getStudent().getLastname()+" "+e.getStudent().getFirstname());
 			examArray.add(e);
 		}
@@ -313,7 +313,7 @@ public class VueCreerExam extends JPanel {
 	
 	public void supprimerSelectionListe() {
 		if(!examList.isSelectionEmpty()) {
-			ModelAgenda.instance().remove(examArray.get(examList.getSelectedIndex()));
+			ModeleExam.instance().remove(examArray.get(examList.getSelectedIndex()));
 			examModel.remove(examList.getSelectedIndex());
 			rafraichir();
 		}
@@ -494,7 +494,7 @@ public class VueCreerExam extends JPanel {
 		if(!rechercherExamField.getText().replace(" ", "").equals("")) {
 			examArray.clear();
 			examModel.clear();
-			for(ExamEvent event : ModelAgenda.instance()) {
+			for(ExamEvent event : ModeleExam.instance()) {
 				if(rechercherExamField.getText().replace(" " , "").equals(event.getStudent().getLastname())) {
 					examArray.add(event);
 					examModel.addElement(event.getStudent().getLastname()+" "+event.getStudent().getFirstname());

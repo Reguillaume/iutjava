@@ -1,5 +1,10 @@
 package edu.iut.app;
 
+/**
+ * Classe représentant un document.
+ * @author Guizmo
+ *
+ */
 public class Document {
 	
 	public Document() {

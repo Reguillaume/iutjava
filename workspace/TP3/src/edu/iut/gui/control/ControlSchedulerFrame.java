@@ -1,10 +1,12 @@
-package edu.iut.gui.frames;
+package edu.iut.gui.control;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter.DEFAULT;
+
+import edu.iut.gui.frames.SchedulerFrame;
 
 public class ControlSchedulerFrame implements ActionListener {
 	private SchedulerFrame vue;

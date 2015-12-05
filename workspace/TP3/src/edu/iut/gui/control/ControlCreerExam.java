@@ -8,7 +8,7 @@ import java.util.PrimitiveIterator.OfDouble;
 import javax.swing.JOptionPane;
 
 import edu.iut.app.ExamEvent;
-import edu.iut.gui.widget.agenda.ModelAgenda;
+import edu.iut.gui.modele.ModeleExam;
 import edu.iut.gui.widget.vue.VueCreerExam;
 
 public class ControlCreerExam implements ActionListener {
@@ -113,14 +113,14 @@ public class ControlCreerExam implements ActionListener {
 			ExamEvent exam=new ExamEvent(new Date(), vue.getSelectEtudiant(), vue.getSelectJury(), vue.getSelectClassroom(), vue.getSelectDocument());
 			if(modification!=-1) {
 				if(JOptionPane.showConfirmDialog(null, "Êtes-vous sûr de vouloir modifier l'examen ?", "Confirmation", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
-					ModelAgenda.instance().remove(vue.getExamArray().get(modification));
-					ModelAgenda.instance().add(exam);
+					ModeleExam.instance().remove(vue.getExamArray().get(modification));
+					ModeleExam.instance().add(exam);
 					vue.initialiserExamList();
 					vue.showExamList();
 				}
 			}
 			else if(JOptionPane.showConfirmDialog(null, "Êtes-vous sûr de vouloir créer l'examen ?", "Confirmation", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
-				ModelAgenda.instance().add(exam);
+				ModeleExam.instance().add(exam);
 				vue.initialiserExamList();
 				vue.showExamList();
 			}
