@@ -8,7 +8,6 @@ import edu.iut.app.CommandLineParser;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
-
 public class IUTScheduler {
 	public static void main(String[] args) {
 		Locale.setDefault(Locale.FRANCE);
