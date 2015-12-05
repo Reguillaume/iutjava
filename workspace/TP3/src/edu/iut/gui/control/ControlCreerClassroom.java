@@ -9,6 +9,12 @@ import edu.iut.app.Classroom;
 import edu.iut.gui.widget.vue.VueCreerClassroom;
 import edu.iut.gui.modele.ModeleClassroom;
 
+/**
+ * Contrôleur permettant de gérer le panel pour créer une salle de classe.
+ * @see VueCréerClassroom
+ * @author Guizmo
+ *
+ */
 public class ControlCreerClassroom implements ActionListener {
 	private VueCreerClassroom vue;
 	

@@ -11,6 +11,12 @@ import edu.iut.app.ExamEvent;
 import edu.iut.gui.modele.ModeleExam;
 import edu.iut.gui.widget.vue.VueCreerExam;
 
+/**
+ * Contrôleur permettant de gérer le panel pour créer un examen.
+ * @see VueCreerExam
+ * @author Guizmo
+ *
+ */
 public class ControlCreerExam implements ActionListener {
 	private VueCreerExam vue;
 	private static int modification;

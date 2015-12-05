@@ -4,6 +4,13 @@ import java.util.ArrayList;
 
 import edu.iut.app.ExamEvent;
 
+/**
+ * Classe permettant de filtrer les examens par salle de classe.
+ * @see ExamEvent
+ * @see Classroom
+ * @author Guizmo
+ *
+ */
 public class CritereClassroom implements Critere {
 	private String num;
 	

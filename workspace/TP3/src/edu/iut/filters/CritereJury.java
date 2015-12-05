@@ -5,6 +5,13 @@ import java.util.ArrayList;
 import edu.iut.app.ExamEvent;
 import edu.iut.app.Person;
 
+/**
+ * Classe permettant de filtrer les examens par jury.
+ * @see ExamEvent
+ * @see Person
+ * @author Guizmo
+ *
+ */
 public class CritereJury implements Critere {
 	
 	private String nom;

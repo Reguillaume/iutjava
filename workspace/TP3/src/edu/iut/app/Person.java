@@ -1,5 +1,10 @@
 package edu.iut.app;
 
+/**
+ * Classe représentant un étudiant ou un jury.
+ * @author Guizmo
+ *
+ */
 public class Person {
 	
 	public enum PersonFunction{

@@ -4,6 +4,12 @@ import java.util.ArrayList;
 
 import edu.iut.app.Document;
 
+/**
+ * Classe permettant de stocker tous les documents.
+ * @see Document
+ * @author Guizmo
+ *
+ */
 public class ModeleDocument extends ArrayList<Document> {
 	private static ModeleDocument documents=null;
 	

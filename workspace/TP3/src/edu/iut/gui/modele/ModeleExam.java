@@ -3,7 +3,6 @@ package edu.iut.gui.modele;
 import java.util.ArrayList;
 import java.util.Date;
 
-import edu.iut.app.Agenda;
 import edu.iut.app.Classroom;
 import edu.iut.app.Document;
 import edu.iut.app.ExamEvent;
@@ -13,7 +12,13 @@ import edu.iut.gui.modele.ModeleClassroom;
 import edu.iut.gui.modele.ModeleDocument;
 import edu.iut.gui.modele.ModelePerson;
 
-public class ModeleExam extends Agenda {
+/**
+ * Classe permettant de stocker tous les examens.
+ * @see ExamEvent
+ * @author Guizmo
+ *
+ */
+public class ModeleExam extends ArrayList<ExamEvent> {
 	private static ModeleExam agenda=null;
 	
 	static public ModeleExam instance() {

@@ -1,0 +1,10 @@
+edu.iut.app
+edu.iut.exceptions
+edu.iut.filters
+edu.iut.gui.control
+edu.iut.gui.frames
+edu.iut.gui.listeners
+edu.iut.gui.modele
+edu.iut.gui.widget.agenda
+edu.iut.gui.widget.vue
+edu.iut.tools

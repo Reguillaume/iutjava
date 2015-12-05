@@ -10,6 +10,12 @@ import edu.iut.app.Person.PersonFunction;
 import edu.iut.gui.widget.vue.VueTabPerson;
 import edu.iut.gui.modele.ModelePerson;
 
+/**
+ * Contrôleur permettant de gérer le panel pour créer une personne.
+ * @see VueTabPerson
+ * @author Guizmo
+ *
+ */
 public class ControlTabPerson implements ActionListener {
 	VueTabPerson vue;
 	

@@ -17,6 +17,12 @@ import javax.swing.SpinnerNumberModel;
 
 import edu.iut.app.ApplicationSession;
 
+/**
+ * Classe permettant d'afficher des widgets pour selectionner un jour et afficher la liste des examens.
+ * @see VueCreerExam
+ * @author Guizmo
+ *
+ */
 public class VueTabNavigation extends JPanel {
 	private JComboBox<String> daysCombo;
 	private JComboBox<String> monthCombo;

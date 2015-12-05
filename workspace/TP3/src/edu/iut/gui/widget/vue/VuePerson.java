@@ -7,6 +7,12 @@ import javax.swing.JPanel;
 
 import edu.iut.app.Person;
 
+/**
+ * Classe permettant d'afficher un jury ou un étudiant.
+ * @see Person
+ * @author Guizmo
+ *
+ */
 public class VuePerson extends JPanel {
 	public VuePerson(Person p) {
 		setLayout(new GridLayout(5, 2));

@@ -5,6 +5,13 @@ import java.util.ArrayList;
 import edu.iut.app.Document;
 import edu.iut.app.ExamEvent;
 
+/**
+ * Classe permettant de filtrer les examens par document.
+ * @see ExamEvent
+ * @see Document
+ * @author Guizmo
+ *
+ */
 public class CritereDocument implements Critere {
 	private String doc;
 	

@@ -16,7 +16,11 @@ import edu.iut.gui.widget.agenda.AgendaPanelFactory;
 import edu.iut.gui.widget.agenda.ControlAgendaViewPanel;
 import edu.iut.gui.widget.agenda.AgendaPanelFactory.ActiveView;
 
-
+/**
+ * Classe représentant la fenêtre principal de l'application.
+ * @author Guizmo
+ *
+ */
 public class SchedulerFrame extends JFrame {
 	JPanel contentPane;
 	CardLayout layerLayout;

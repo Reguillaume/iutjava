@@ -3,6 +3,15 @@ package edu.iut.gui.widget.vue;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
+/**
+ * Classe regroupant tous les panels sous forme d'onglets.
+ * @see VueTabNavigation
+ * @see VueTabPerson
+ * @see VueCreerClassroom
+ * @see VueCreerDocument
+ * @author Guizmo
+ *
+ */
 public class VueTabbed extends JPanel {
 	private JTabbedPane onglets;
 	

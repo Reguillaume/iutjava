@@ -13,11 +13,31 @@ import javax.swing.JTextField;
 
 import edu.iut.gui.control.ControlCreerDocument;
 
+/**
+ * Classe permettant d'afficher des widgets pour créer un document.
+ * @see Document
+ * @author Guizmo
+ *
+ */
 public class VueCreerDocument extends JPanel {
+	/**
+	 * Champ de texte pour entrer l'URI du document.
+	 */
 	private JTextField uriField;
+	
+	/**
+	 * Bouton pour créer un document à partir du champ de texte.
+	 */
 	private JButton creerButton;
+	
+	/**
+	 * Bouton pour effacer le contenu du champ de texte.
+	 */
 	private JButton effacerButton;
 	
+	/**
+	 * Construit le panel.
+	 */
 	public VueCreerDocument() {
 		JPanel docPanel=new JPanel();
 		docPanel.setLayout(new BoxLayout(docPanel, BoxLayout.X_AXIS));
@@ -41,10 +61,17 @@ public class VueCreerDocument extends JPanel {
 		add(buttonsPanel, BorderLayout.SOUTH);
 	}
 	
+	/**
+	 * Fonction pour effacer le contenu du champ de texte.
+	 */
 	public void nettoyerChamps() {
 		uriField.setText("");
 	}
 	
+	/**
+	 * Retourne le champ de texte.
+	 * @return Champ de texte sous forme de JTextField.
+	 */
 	public JTextField getUriField() {
 		return uriField;
 	}

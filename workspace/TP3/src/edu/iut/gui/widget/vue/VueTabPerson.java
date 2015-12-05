@@ -22,6 +22,11 @@ import edu.iut.app.Person.PersonFunction;
 import edu.iut.gui.control.ControlTabPerson;
 import edu.iut.gui.modele.ModelePerson;
 
+/**
+ * Classe permettant d'afficher la liste des étudiants et la possibilité d'en créer.
+ * @author Guizmo
+ *
+ */
 public class VueTabPerson extends JPanel {
 	//Liste
 	private JPanel personListePanel;

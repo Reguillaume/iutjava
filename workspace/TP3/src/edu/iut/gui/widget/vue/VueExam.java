@@ -10,6 +10,12 @@ import edu.iut.app.Document;
 import edu.iut.app.ExamEvent;
 import edu.iut.app.Person;
 
+/**
+ * Classe permettant d'afficher un examen.
+ * @see ExamEvent
+ * @author Guizmo
+ *
+ */
 public class VueExam extends JPanel {	
 	public VueExam(ExamEvent exam) {
 		//DATE

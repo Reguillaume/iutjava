@@ -30,7 +30,16 @@ import edu.iut.gui.modele.ModeleDocument;
 import edu.iut.gui.modele.ModelePerson;
 import edu.iut.gui.modele.ModeleExam;
 
+/**
+ * Classe permettant d'afficher des widgets pour créer et voir des examens.
+ * @see ExamEvent
+ * @author Guizmo
+ *
+ */
 public class VueCreerExam extends JPanel {
+	/**
+	 * L'onglet parent.
+	 */
 	private JTabbedPane onglets;
 	
 	private DefaultListModel<String> examModel=new DefaultListModel<>();
@@ -87,8 +96,16 @@ public class VueCreerExam extends JPanel {
 	//CARDLAYOUT
 	CardLayout gestionnaire=new CardLayout();
 	
+	/**
+	 * Le nom du layout que le panel affiche sous forme de chaîne de caractères.
+	 */
 	private String currentPanel=null;
 	
+	/**
+	 * Construit le panel.
+	 * @param onglets
+	 * 	L'onglet parent d'où se trouve le panel.
+	 */
 	public VueCreerExam(JTabbedPane onglets) {
 		this.onglets=onglets;
 		
@@ -233,6 +250,10 @@ public class VueCreerExam extends JPanel {
 		showExamList();
 	}
 	
+	/**
+	 * Initialise la liste des examens.
+	 * @see ModeleExam
+	 */
 	public void initialiserExamList() {
 		examArray.clear();
 		examModel.clear();
@@ -242,6 +263,10 @@ public class VueCreerExam extends JPanel {
 		}
 	}
 	
+	/**
+	 * Initialise la liste des étudiants.
+	 * @see ModelePerson
+	 */
 	public void initialiserEtudiantList() {
 		etudiantArray.clear();
 		etudiantModel.clear();
@@ -253,6 +278,10 @@ public class VueCreerExam extends JPanel {
 		}
 	}
 	
+	/**
+	 * Initialise la liste tous les jurys ainsi que la liste où se trouve les jurys selectionnés par l'utilisateur.
+	 * @see ModelePerson
+	 */
 	public void initialiserJuryList() {
 		allJuryArray.clear();
 		allJuryModel.clear();
@@ -266,6 +295,10 @@ public class VueCreerExam extends JPanel {
 		}
 	}
 	
+	/**
+	 * Initialise seulement la liste de tous les jurys de l'application.
+	 * @see ModelePerson
+	 */
 	public void initialiserAllJuryList() {
 		allJuryArray.clear();
 		allJuryModel.clear();
@@ -277,6 +310,10 @@ public class VueCreerExam extends JPanel {
 		}
 	}
 	
+	/**
+	 * Initialise la liste des salles de classe.
+	 * @see ModeleClassroom
+	 */
 	public void initialiserClassroomList() {
 		classroomArray.clear();
 		classroomModel.clear();
@@ -286,6 +323,10 @@ public class VueCreerExam extends JPanel {
 		}
 	}
 	
+	/**
+	 * Initialise la liste de tous les documents ainsi que la liste où se trouve les documents selectionnés par l'utilisateur.
+	 * @see Document
+	 */
 	public void initialiserDocumentList() {
 		allDocumentModel.clear();
 		allDocumentArray.clear();
@@ -297,6 +338,9 @@ public class VueCreerExam extends JPanel {
 		}
 	}
 	
+	/**
+	 * Initialise seulement la liste où se trouve tous les documents de l'applications.
+	 */
 	public void initialiserAllDocumentList() {
 		allDocumentArray.clear();
 		allDocumentModel.clear();
@@ -306,11 +350,17 @@ public class VueCreerExam extends JPanel {
 		}
 	}
 	
+	/**
+	 * Rafraichit le panel où se trouve la description des examens.
+	 */
 	public void rafraichir() {
 		descPanel.revalidate();
 		descPanel.repaint();
 	}
 	
+	/**
+	 * Fonction permettant de supprimer un examen selectionné dans la liste.
+	 */
 	public void supprimerSelectionListe() {
 		if(!examList.isSelectionEmpty()) {
 			ModeleExam.instance().remove(examArray.get(examList.getSelectedIndex()));
@@ -319,18 +369,30 @@ public class VueCreerExam extends JPanel {
 		}
 	}
 
+	/**
+	 * Fonction affichant la liste des examens.
+	 */
 	public void showExamList() {
 		gestionnaire.show(this, "creer");
 		currentPanel="creer";
 		initialiserExamList();
 	}
 	
+	/**
+	 * Fonction affichant la liste des étudiants.
+	 */
 	public void showEtudiantSelect() {
 		gestionnaire.show(this, "selectEtudiant");
 		currentPanel="selectEtudiant";
 		initialiserEtudiantList();
 	}
 	
+	/**
+	 * Fonction affichant la liste des étudiants pré-selectionnée par l'étudiant en paramètre.
+	 * @param p
+	 * 	Un étudiant sous forme de Person
+	 * @see Person
+	 */
 	public void showEtudiantSelect(Person p) {
 		gestionnaire.show(this, "selectEtudiant");
 		currentPanel="selectEtudiant";
@@ -338,12 +400,21 @@ public class VueCreerExam extends JPanel {
 		etudiantList.setSelectedIndex(etudiantArray.indexOf(p));
 	}
 
+	/**
+	 * Fonction affichant la liste des jurys.
+	 */
 	public void showJurySelect() {
 		gestionnaire.show(this, "selectJury");
 		currentPanel="selectJury";
 		initialiserJuryList();
 	}
 	
+	/**
+	 * Fonction affichant la liste des jurys pré-remplie par la liste de jurys en paramètre.
+	 * @param p
+	 * 	Liste de jurys sous forme d'un ArrayList de Person
+	 * @see	Person
+	 */
 	public void showJurySelect(ArrayList<Person> p) {
 		gestionnaire.show(this, "selectJury");
 		currentPanel="selectJury";
@@ -354,12 +425,21 @@ public class VueCreerExam extends JPanel {
 		}
 	}
 	
+	/**
+	 * Fonction affichant la liste des salles de classe.
+	 */
 	public void showClassroomSelect() {
 		gestionnaire.show(this, "selectClassroom");
 		currentPanel="selectClassroom";
 		initialiserClassroomList();
 	}
 	
+	/**
+	 * Fonction affichant la liste des salles de classe pré-selectionné par la salle de classe en paramètre.
+	 * @param c
+	 * 	Une salle de classe sous forme de Classroom
+	 * @see Classroom
+	 */
 	public void showClassroomSelect(Classroom c) {
 		gestionnaire.show(this, "selectClassroom");
 		currentPanel="selectClassroom";
@@ -367,12 +447,21 @@ public class VueCreerExam extends JPanel {
 		classroomList.setSelectedIndex(classroomArray.indexOf(c));
 	}
 	
+	/** 
+	 * Fonction affichant la liste des documents.
+	 */
 	public void showDocumentSelect() {
 		gestionnaire.show(this, "selectDocument");
 		currentPanel="selectDocument";
 		initialiserDocumentList();
 	}
 	
+	/**
+	 * Fonction affichant la liste des documents pré-remplie par la liste de documents en paramètre.
+	 * @param d
+	 * 	Liste de documents sous forme d'un ArrayList de Document.
+	 * @see Document
+	 */
 	public void showDocumentSelect(ArrayList<Document> d) {
 		gestionnaire.show(this, "selectDocument");
 		currentPanel="selectDocument";
@@ -383,6 +472,9 @@ public class VueCreerExam extends JPanel {
 		}
 	}
 	
+	/**
+	 * Ajoute le jury selectionné à la lise des jurys de l'examen.
+	 */
 	public void ajouterSelectJury() {
 		if(!allJuryList.isSelectionEmpty()) {
 			selectJuryArray.add(allJuryArray.get(allJuryList.getSelectedIndex()));
@@ -390,6 +482,9 @@ public class VueCreerExam extends JPanel {
 		}
 	}
 	
+	/**
+	 * Enleve le jury selectionné de la liste des jurys de l'examen.
+	 */
 	public void enleverSelectJury() {
 		if(!selectJuryList.isSelectionEmpty()) {
 			selectJuryArray.remove(selectJuryList.getSelectedIndex());
@@ -397,6 +492,9 @@ public class VueCreerExam extends JPanel {
 		}
 	}
 	
+	/**
+	 * Ajoute le document selectionné dans la liste des documents de l'examen.
+	 */
 	public void ajouterSelectDocument() {
 		if(!allDocumentList.isSelectionEmpty()) {
 			selectDocumentArray.add(allDocumentArray.get(allDocumentList.getSelectedIndex()));
@@ -404,6 +502,9 @@ public class VueCreerExam extends JPanel {
 		}
 	}
 	
+	/**
+	 * Enleve le document selectionné de la liste des documents de l'examen.
+	 */
 	public void enleverSelectDocument() {
 		if(!selectDocumentList.isSelectionEmpty()) {
 			selectDocumentArray.remove(selectDocumentList.getSelectedIndex());
@@ -411,6 +512,10 @@ public class VueCreerExam extends JPanel {
 		}
 	}
 	
+	/**
+	 * Fonction initialisant tous les boutons et panel du formulaire pour créer un examen.
+	 * @param panel
+	 */
 	public void initialiserFormulairePanel(String panel) {
 		retourButton=new JButton("Retour");
 		suivantButton=new JButton("Suivant");
@@ -454,6 +559,9 @@ public class VueCreerExam extends JPanel {
 		}
 	}
 	
+	/**
+	 * Fonction initialisant tous les boutons pour selectionner les jurys ou documents de l'examen.
+	 */
 	public void initialiserButtonsSelectPanel() {
 		buttonsSelectPanel=new JPanel(new GridLayout(5,1));
 		ajouterSelectButton=new JButton(">>");
@@ -470,26 +578,41 @@ public class VueCreerExam extends JPanel {
 		enleverSelectButton.addActionListener(control);
 	}
 	
+	/**
+	 * Fonction renvoyant à la page pour créer un étudiant.
+	 */
 	public void goCreerEtudiantTab() {
 		onglets.setSelectedIndex(1);
 		((VueTabPerson) onglets.getSelectedComponent()).getFonctionBox().setSelectedIndex(1);;
 		((VueTabPerson) onglets.getSelectedComponent()).creerPage();
 	}
 	
+	/**
+	 * Fonction renvoyant à la page pour créer un jury.
+	 */
 	public void goCreerJuryTab() {
 		onglets.setSelectedIndex(1);
 		((VueTabPerson) onglets.getSelectedComponent()).getFonctionBox().setSelectedIndex(0);;
 		((VueTabPerson) onglets.getSelectedComponent()).creerPage();
 	}
 	
+	/**
+	 * Fonction renvoyant à la page pour créer une salle de classe.
+	 */
 	public void goCreerClassroomTab() {
 		onglets.setSelectedIndex(2);
 	}
 	
+	/**
+	 * Fonction renvoyant à la page pour créer un document.
+	 */
 	public void goCreerDocumentTab() {
 		onglets.setSelectedIndex(3);
 	}
 	
+	/**
+	 * Fonction changeant la liste des examens en fonction du champ de recherche.
+	 */
 	public void rechercherExam() {
 		if(!rechercherExamField.getText().replace(" ", "").equals("")) {
 			examArray.clear();
@@ -508,6 +631,9 @@ public class VueCreerExam extends JPanel {
 		}
 	}
 	
+	/**
+	 * Fonction changeant la liste des étudiants en fonction du champ de recherche.
+	 */
 	public void rechercherEtudiant() {
 		if(!rechercherEtudiantField.getText().replace(" ", "").equals("")) {
 			etudiantArray.clear();
@@ -524,6 +650,9 @@ public class VueCreerExam extends JPanel {
 		}
 	}
 	
+	/**
+	 * Fonction changeant la liste des jurys en fonction du champ de recherche.
+	 */
 	public void rechercherJury() {
 		if(!rechercherJuryField.getText().replace(" ", "").equals("")) {
 			allJuryArray.clear();
@@ -540,6 +669,9 @@ public class VueCreerExam extends JPanel {
 		}
 	}
 	
+	/**
+	 * Fonction changeant la liste des salles de classe en fonction du champ de recherche.
+	 */
 	public void rechercherClassroom() {
 		if(!rechercherClassroomField.getText().replace(" ", "").equals("")) {
 			classroomArray.clear();
@@ -556,6 +688,9 @@ public class VueCreerExam extends JPanel {
 		}
 	}
 	
+	/**
+	 * Fonction changeant la liste des documents en fonction du champ de recherche.
+	 */
 	public void rechercherDocument() {
 		if(!rechercherDocumentField.getText().replace(" ", "").equals("")) {
 			allDocumentArray.clear();
@@ -572,26 +707,55 @@ public class VueCreerExam extends JPanel {
 		}
 	}
 	
+	/**
+	 * Retourne l'étudiant selectionné.
+	 * @return
+	 * 	L'étudiant selectionné sous forme de Person.
+	 * @see Person
+	 */
 	public Person getSelectEtudiant() {
 		return etudiantArray.get(etudiantList.getSelectedIndex());
 	}
 	
+	/**
+	 * Retourne la liste des jurys selectionnés.
+	 * @return Liste des jurys selectionnés sous forme d'un ArrayList de Person.
+	 * @see Person
+	 */
 	public ArrayList<Person> getSelectJury() {
 		return selectJuryArray;
 	}
 	
+	/**
+	 * Retourne la salle de classe selectionnée.
+	 * @return Salle de classe selectionnée sous forme de Classroom.
+	 * @see Classroom
+	 */
 	public Classroom getSelectClassroom() {
 		return classroomArray.get(classroomList.getSelectedIndex());
 	}
 	
+	/**
+	 * Retourne la liste des documents selectionnés.
+	 * @return Liste de documents selectionnés sous forme d'un ArrayList de Document.
+	 * @see Document
+	 */
 	public ArrayList<Document> getSelectDocument() {
 		return selectDocumentArray;
 	}
 	
+	/**
+	 * Retourne la liste des examens.
+	 * @return Liste des examens sous forme de JList de chaîne de caractères.
+	 */
 	public JList<String> getExamList() {
 		return examList;
 	}
 	
+	/**
+	 * Retourne le layout que le panel affiche.
+	 * @return Layout que le panel affiche sous forme de chaîne de caractères.
+	 */
 	public String getCurrentPanel() {
 		return currentPanel;
 	}
@@ -599,11 +763,12 @@ public class VueCreerExam extends JPanel {
 	public JButton getQuitterButton() {
 		return quitterButton;
 	}
-
-	public void setQuitterButton(JButton quitterButton) {
-		this.quitterButton = quitterButton;
-	}
 	
+	/**
+	 * Retourne la liste des examens.
+	 * @return Liste des examens sous forme d'un ArrayList de ExamEvent.
+	 * @see ExamEvent
+	 */
 	public ArrayList<ExamEvent> getExamArray() {
 		return examArray;
 	}

@@ -13,12 +13,31 @@ import javax.swing.JTextField;
 
 import edu.iut.gui.control.ControlCreerClassroom;
 
+/**
+ * Classe permettant d'afficher des widgets pour créer une salle de classe.
+ * @see Classroom
+ * @author Guizmo
+ *
+ */
 public class VueCreerClassroom extends JPanel {
+	/**
+	 * Champ de texte pour entrer le nom de la salle.
+	 */
 	private JTextField nomField;
 	
+	/**
+	 * Bouton pour créer la salle de classe à partir du champ de texte.
+	 */
 	private JButton creerButton;
+	
+	/**
+	 * Bouton pour effacer le contenu du champ de texte.
+	 */
 	private JButton effacerButton;
 	
+	/**
+	 * Construit le panel.
+	 */
 	public VueCreerClassroom() {
 		JPanel classPanel=new JPanel();
 		classPanel.setLayout(new BoxLayout(classPanel, BoxLayout.X_AXIS));
@@ -41,10 +60,17 @@ public class VueCreerClassroom extends JPanel {
 		add(buttonsPanel, BorderLayout.SOUTH);
 	}
 	
+	/**
+	 * Retourne le champ de texte.
+	 * @return Champ de texte sous forme de JTextField.
+	 */
 	public JTextField getNomField() {
 		return nomField;
 	}
-
+	
+	/**
+	 * Fonction permettant de vider le contenu du champ de texte.
+	 */
 	public void nettoyerChamps() {
 		nomField.setText("");
 	}
