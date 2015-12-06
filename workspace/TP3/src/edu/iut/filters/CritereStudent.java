@@ -3,7 +3,7 @@ package edu.iut.filters;
 import java.util.ArrayList;
 
 import edu.iut.app.ExamEvent;
-import edu.iut.filters.Critere;;
+import edu.iut.filters.Critere;
 
 /**
  * Classe permettant de filter les examens par étudiant.

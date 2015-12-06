@@ -50,6 +50,9 @@ public class VueTabPerson extends JPanel {
 	private JButton creerButton;
 	private JButton effacerButton;
 	
+	/**
+	 * Construit le panel.
+	 */
 	public VueTabPerson() {
 		//LISTE
 
@@ -146,6 +149,11 @@ public class VueTabPerson extends JPanel {
 		add(creerPersonPanel, "creer");
 	}
 	
+	/**
+	 * Initialise la liste d'étudiants ou de jurys à partir des personnes stockées dans l'application.
+	 * @see Person
+	 * @see ModelePerson
+	 */
 	public void initialiserListe() {
 		personModel.clear();
 		personArray.clear();
@@ -155,26 +163,41 @@ public class VueTabPerson extends JPanel {
 		}
 	}
 	
+	/**
+	 * Efface le panel où se trouve la description des personnes.
+	 */
 	public void effacerDesc() {
 		descPanel.removeAll();
 		descPanel.revalidate();
 		descPanel.repaint();
 	}
 	
+	/**
+	 * Supprime la personne selectionné dans la liste.
+	 */
 	public void supprimerSelectionListe() {
 		ModelePerson.instance().remove(personArray.get(personList.getSelectedIndex()));
 		personModel.remove(personList.getSelectedIndex());
 		effacerDesc();
 	}
 	
+	/**
+	 * Affiche la page pour créer une personne.
+	 */
 	public void creerPage() {
 		gestionnaire.show(this, "creer");
 	}
 	
+	/**
+	 * Affiche le panel où il y a la liste des personnes.
+	 */
 	public void listePage() {
 		gestionnaire.show(this, "liste");
 	}
 	
+	/**
+	 * Efface le contenu de tous les champs du panel pour créer une personne.
+	 */
 	public void nettoyerChampsCreer() {
 		nomField.setText("");
 		prenomField.setText("");
@@ -182,6 +205,9 @@ public class VueTabPerson extends JPanel {
 		phoneField.setText("");
 	}
 
+	/**
+	 * Modifie la liste de personne en fonction du contenu du champ de texte de recherche.
+	 */
 	public void rechercherListe() {
 		effacerDesc();
 		personArray.clear();

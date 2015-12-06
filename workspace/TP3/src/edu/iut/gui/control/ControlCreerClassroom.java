@@ -11,7 +11,7 @@ import edu.iut.gui.modele.ModeleClassroom;
 
 /**
  * Contrôleur permettant de gérer le panel pour créer une salle de classe.
- * @see VueCréerClassroom
+ * @see VueCreerClassroom
  * @author Guizmo
  *
  */
