@@ -12,7 +12,7 @@ import edu.iut.gui.modele.ModeleExam;
 import edu.iut.gui.widget.vue.VueCreerExam;
 
 /**
- * Contrôleur permettant de gérer le panel pour créer un examen.
+ * ContrÃ´leur permettant de gÃ©rer le panel pour crÃ©er un examen.
  * @see VueCreerExam
  * @author Guizmo
  *

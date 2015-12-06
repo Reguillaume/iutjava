@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter.DEFAULT;
 import edu.iut.gui.frames.SchedulerFrame;
 
 /**
- * Contrôleur pour gérer le panel pour choisir la date du planning.
+ * ContrÃ´leur pour gÃ©rer le panel pour choisir la date du planning.
  * @see SchedulerFrame
  * @author Guizmo
  *

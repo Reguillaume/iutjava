@@ -17,7 +17,7 @@ import edu.iut.gui.widget.agenda.ControlAgendaViewPanel;
 import edu.iut.gui.widget.agenda.AgendaPanelFactory.ActiveView;
 
 /**
- * Classe représentant la fenêtre principal de l'application.
+ * Classe reprÃ©sentant la fenÃªtre principal de l'application.
  * @author Guizmo
  *
  */

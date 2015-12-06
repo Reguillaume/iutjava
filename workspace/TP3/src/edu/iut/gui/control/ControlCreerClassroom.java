@@ -10,7 +10,7 @@ import edu.iut.gui.widget.vue.VueCreerClassroom;
 import edu.iut.gui.modele.ModeleClassroom;
 
 /**
- * Contrôleur permettant de gérer le panel pour créer une salle de classe.
+ * ContrÃ´leur permettant de gÃ©rer le panel pour crÃ©er une salle de classe.
  * @see VueCreerClassroom
  * @author Guizmo
  *

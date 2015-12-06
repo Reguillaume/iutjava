@@ -10,7 +10,7 @@ import edu.iut.gui.modele.ModeleDocument;
 import edu.iut.gui.widget.vue.VueCreerDocument;
 
 /**
- * Contrôleur permettant de gérer le panel pour créer un document.
+ * ContrÃ´leur permettant de gÃ©rer le panel pour crÃ©er un document.
  * @see VueCreerDocument
  * @author Guizmo
  *

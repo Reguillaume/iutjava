@@ -11,7 +11,7 @@ import edu.iut.gui.widget.vue.VueTabPerson;
 import edu.iut.gui.modele.ModelePerson;
 
 /**
- * Contrôleur permettant de gérer le panel pour créer une personne.
+ * ContrÃ´leur permettant de gÃ©rer le panel pour crÃ©er une personne.
  * @see VueTabPerson
  * @author Guizmo
  *
