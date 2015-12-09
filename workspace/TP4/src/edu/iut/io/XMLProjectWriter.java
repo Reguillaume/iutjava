@@ -67,7 +67,7 @@ public class XMLProjectWriter {
 				for(edu.iut.app.Document d: e.getDocuments()){
 					Element doc2 = document.createElement("doc");
 					doc2.setAttribute("id", String.valueOf(ModeleDocument.instance().indexOf(d)));
-					jury.appendChild(doc2);
+					doc.appendChild(doc2);
 				}
 				
 				exam.appendChild(etudiant);
@@ -83,10 +83,7 @@ public class XMLProjectWriter {
 			DOMSource source = new DOMSource(document);
 			StreamResult result = new StreamResult(xmlfile);
 			
-			transformer.transform(source, result);
-			
-			System.out.println("Save");
-			
+			transformer.transform(source, result);			
 		}
 		catch (TransformerConfigurationException e) {
 			e.printStackTrace();

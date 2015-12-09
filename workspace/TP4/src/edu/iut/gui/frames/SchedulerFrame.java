@@ -3,6 +3,7 @@ package edu.iut.gui.frames;
 import java.awt.CardLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -12,10 +13,11 @@ import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
 import edu.iut.gui.control.ControlSchedulerFrame;
-import edu.iut.gui.control.ControleurFrame;
+import edu.iut.gui.modele.ModeleExam;
 import edu.iut.gui.widget.agenda.AgendaPanelFactory;
 import edu.iut.gui.widget.agenda.ControlAgendaViewPanel;
 import edu.iut.gui.widget.agenda.AgendaPanelFactory.ActiveView;
+import edu.iut.io.XMLProjectWriter;
 
 /**
  * Classe représentant la fenêtre principal de l'application.
@@ -30,10 +32,7 @@ public class SchedulerFrame extends JFrame {
 	JPanel weekView;
 	JPanel monthView;
 	
-	protected void setupUI() {
-		ControleurFrame controleurFrame=new ControleurFrame();
-		addWindowListener(controleurFrame);
-		
+	protected void setupUI() {	
 		contentPane = new JPanel();
 		layerLayout = new CardLayout();
 		contentPane.setLayout(layerLayout);
@@ -105,7 +104,7 @@ public class SchedulerFrame extends JFrame {
 	
 	public SchedulerFrame() {
 		super();
-		
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		addWindowListener (new WindowAdapter(){
 			public void windowClosing (WindowEvent e){
 				System.exit(0);
@@ -123,6 +122,8 @@ public class SchedulerFrame extends JFrame {
 		super(title);
 		addWindowListener (new WindowAdapter(){
 			public void windowClosing (WindowEvent e){
+				XMLProjectWriter xml=new XMLProjectWriter();
+				xml.save(ModeleExam.instance(), new File("save.xml"));
 				System.exit(0);
 			}
 		});
