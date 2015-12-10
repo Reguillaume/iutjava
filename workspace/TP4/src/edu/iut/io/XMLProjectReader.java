@@ -33,7 +33,7 @@ public class XMLProjectReader {
 			NodeList rootChild=root.getElementsByTagName("exam");
 			for(int i=0; i<rootChild.getLength(); i++) {
 				if(rootChild.item(i).getNodeType()==Node.ELEMENT_NODE) {
-					System.out.println(((Element) rootChild.item(i)).getAttribute("date"));
+					System.out.println(((Element) rootChild.item(i)).getAttribute("id"));
 				}
 			}
 		} catch (ParserConfigurationException e) {

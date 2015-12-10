@@ -48,8 +48,13 @@ public class XMLProjectWriter {
 				ExamEvent e=ModeleExam.instance().get(i);
 				Element exam = document.createElement("exam");
 				exam.setAttribute("id", String.valueOf(i));
-				exam.setAttribute("date", e.getExamDate().toString());
 				
+				Element date=document.createElement("date");
+				date.setAttribute("heure", String.valueOf(e.getExamDate().getHours()));
+				date.setAttribute("jour", String.valueOf(e.getExamDate().getDay()));
+				date.setAttribute("mois", String.valueOf(e.getExamDate().getMonth()));
+				date.setAttribute("annee", String.valueOf(e.getExamDate().getYear()));
+
 				Element etudiant = document.createElement("etudiant");
 				etudiant.setAttribute("id", String.valueOf(ModelePerson.instance().indexOf(e.getStudent())));
 				
@@ -70,6 +75,7 @@ public class XMLProjectWriter {
 					doc.appendChild(doc2);
 				}
 				
+				exam.appendChild(date);
 				exam.appendChild(etudiant);
 				exam.appendChild(jury);
 				exam.appendChild(classroom);
