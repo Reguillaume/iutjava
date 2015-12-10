@@ -43,7 +43,7 @@ public class XMLProjectWriter {
 			builder = factory.newDocumentBuilder();
 		
 			Document document = builder.newDocument();
-			Element root = document.createElement("examEvent");
+			Element root = document.createElement("examevent");
 			for(int i=0; i<ModeleExam.instance().size(); i++){
 				ExamEvent e=ModeleExam.instance().get(i);
 				Element exam = document.createElement("exam");

@@ -19,7 +19,7 @@ import edu.iut.gui.widget.vue.VueCreerExam;
  */
 public class ControlCreerExam implements ActionListener {
 	private VueCreerExam vue;
-	private static int modification;
+	private static int modification=-1;
 	
 	public ControlCreerExam(VueCreerExam vue) {
 		this.vue=vue;

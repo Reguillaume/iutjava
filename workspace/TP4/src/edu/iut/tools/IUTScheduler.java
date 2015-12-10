@@ -21,49 +21,6 @@ public class IUTScheduler {
 		SwingUtilities.invokeLater(new Runnable() {
 		    public void run() {
 		        JFrame mainFrame = new edu.iut.gui.frames.SchedulerFrame("IUT Scheduler");
-		        mainFrame.addWindowListener(new WindowListener() {
-					
-					@Override
-					public void windowOpened(WindowEvent e) {
-						// TODO Auto-generated method stub
-						
-					}
-					
-					@Override
-					public void windowIconified(WindowEvent e) {
-						// TODO Auto-generated method stub
-						
-					}
-					
-					@Override
-					public void windowDeiconified(WindowEvent e) {
-						// TODO Auto-generated method stub
-						
-					}
-					
-					@Override
-					public void windowDeactivated(WindowEvent e) {
-						// TODO Auto-generated method stub
-						
-					}
-					
-					@Override
-					public void windowClosing(WindowEvent e) {
-						System.out.println("klol");
-					}
-					
-					@Override
-					public void windowClosed(WindowEvent e) {
-						System.out.println("klol");
-						
-					}
-					
-					@Override
-					public void windowActivated(WindowEvent e) {
-						// TODO Auto-generated method stub
-						
-					}
-				});
 		        mainFrame.setVisible(true);		        
 		    }
 		});

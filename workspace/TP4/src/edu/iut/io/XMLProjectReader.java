@@ -10,6 +10,9 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 // EX 1 Completer la classe
@@ -25,14 +28,18 @@ public class XMLProjectReader {
 		try {
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			Document document= builder.parse(xmlfile);
-			// EX1: Lire un Document XML
+			Element root=document.getDocumentElement();
 			
+			NodeList rootChild=root.getElementsByTagName("exam");
+			for(int i=0; i<rootChild.getLength(); i++) {
+				if(rootChild.item(i).getNodeType()==Node.ELEMENT_NODE) {
+					System.out.println(((Element) rootChild.item(i)).getAttribute("date"));
+				}
+			}
 		} catch (ParserConfigurationException e) {
 		} catch (SAXException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return data;
-		
 	}
 }

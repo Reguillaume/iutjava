@@ -4,6 +4,8 @@ import java.awt.CardLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
+import java.io.IOException;
+import java.sql.Savepoint;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -17,6 +19,7 @@ import edu.iut.gui.modele.ModeleExam;
 import edu.iut.gui.widget.agenda.AgendaPanelFactory;
 import edu.iut.gui.widget.agenda.ControlAgendaViewPanel;
 import edu.iut.gui.widget.agenda.AgendaPanelFactory.ActiveView;
+import edu.iut.io.XMLProjectReader;
 import edu.iut.io.XMLProjectWriter;
 
 /**
@@ -31,6 +34,9 @@ public class SchedulerFrame extends JFrame {
 	JPanel dayView;
 	JPanel weekView;
 	JPanel monthView;
+	
+	XMLProjectWriter xmlQuit=new XMLProjectWriter();
+	XMLProjectReader xmlBegin=new XMLProjectReader();
 	
 	protected void setupUI() {	
 		contentPane = new JPanel();
@@ -122,9 +128,16 @@ public class SchedulerFrame extends JFrame {
 		super(title);
 		addWindowListener (new WindowAdapter(){
 			public void windowClosing (WindowEvent e){
-				XMLProjectWriter xml=new XMLProjectWriter();
-				xml.save(ModeleExam.instance(), new File("save.xml"));
+				xmlQuit.save(ModeleExam.instance(), new File("save.xml"));
 				System.exit(0);
+			}
+			
+			public void windowOpened(WindowEvent e) {
+				try {
+					xmlBegin.load(new File("save.xml"));
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 		setupUI();
