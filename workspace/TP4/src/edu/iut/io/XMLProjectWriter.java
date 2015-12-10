@@ -18,6 +18,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 
+import edu.iut.app.Classroom;
 import edu.iut.app.ExamEvent;
 import edu.iut.app.Person;
 import edu.iut.gui.modele.ModeleClassroom;
@@ -43,7 +44,9 @@ public class XMLProjectWriter {
 			builder = factory.newDocumentBuilder();
 		
 			Document document = builder.newDocument();
-			Element root = document.createElement("examevent");
+			
+			//EXAMEVENT
+			Element rootExamEvent = document.createElement("examevent");
 			for(int i=0; i<ModeleExam.instance().size(); i++){
 				ExamEvent e=ModeleExam.instance().get(i);
 				Element exam = document.createElement("exam");
@@ -80,9 +83,46 @@ public class XMLProjectWriter {
 				exam.appendChild(jury);
 				exam.appendChild(classroom);
 				exam.appendChild(doc);
-				root.appendChild(exam);
+				rootExamEvent.appendChild(exam);
 			}
-			document.appendChild(root);
+			document.appendChild(rootExamEvent);
+			
+			//PERSON
+			Element rootPerson=document.createElement("person");
+			for(int i=0; i<ModelePerson.instance().size(); i++) {
+				Person person=ModelePerson.instance().get(i);
+				Element personChild=document.createElement("p");
+				personChild.setAttribute("id", String.valueOf(i));
+				personChild.setAttribute("fonction", person.getFunction().name());
+				personChild.setAttribute("nom", person.getLastname());
+				personChild.setAttribute("prenom", person.getFirstname());
+				personChild.setAttribute("phone", person.getPhone());
+				personChild.setAttribute("email", person.getEmail());
+				rootPerson.appendChild(personChild);
+			}
+			document.appendChild(rootPerson);
+			
+			//CLASSROOM
+			Element rootClassroom=document.createElement("classroom");
+			for(int i=0; i<ModeleClassroom.instance().size(); i++) {
+				Element classroomChild=document.createElement("c");
+				Classroom classroom=ModeleClassroom.instance().get(i);
+				classroomChild.setAttribute("id", String.valueOf(i));
+				classroomChild.setAttribute("numero", classroom.getClassRoomNumber());
+				rootClassroom.appendChild(classroomChild);
+			}
+			document.appendChild(rootClassroom);
+			
+			//DOCUMENT
+			Element rootDocument=document.createElement("document");
+			for(int i=0; i<ModeleDocument.instance().size(); i++) {
+				edu.iut.app.Document d=ModeleDocument.instance().get(i);
+				Element documentChild=document.createElement("d");
+				documentChild.setAttribute("id", String.valueOf(i));
+				documentChild.setAttribute("uri", d.getDocumentURI());
+				rootDocument.appendChild(documentChild);
+			}
+			document.appendChild(rootDocument);
 			
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
