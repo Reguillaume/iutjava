@@ -23,7 +23,7 @@ public class ModeleExam extends ArrayList<ExamEvent> {
 	
 	static public ModeleExam instance() {
 		if(agenda==null) {
-			agenda=new ModeleExam();
+			agenda=new ModeleExam();/*
 			//On ajoute un exam pour tester
 			Date date=new Date();
 			Person student=new Person(PersonFunction.STUDENT, "Zidane", "Zinédine", "zidane.zinedine@super-star.foot", "010101");
@@ -39,7 +39,7 @@ public class ModeleExam extends ArrayList<ExamEvent> {
 			Classroom classroom=new Classroom("heaven");
 			ModeleClassroom.instance().add(classroom);
 			ExamEvent examEvent=new ExamEvent(date, student, juryArray, classroom, docArray);
-			agenda.add(examEvent);
+			agenda.add(examEvent);*/
 		}
 		return agenda;
 	}

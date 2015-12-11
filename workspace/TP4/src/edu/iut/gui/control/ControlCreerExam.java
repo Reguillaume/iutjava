@@ -160,7 +160,6 @@ public class ControlCreerExam implements ActionListener {
 			vue.goCreerDocumentTab();
 			break;
 		case "Rechercher" :
-			System.out.print("lol");
 			switch(vue.getCurrentPanel()) {
 			case "creer" :
 				vue.rechercherExam();

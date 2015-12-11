@@ -44,9 +44,10 @@ public class XMLProjectWriter {
 			builder = factory.newDocumentBuilder();
 		
 			Document document = builder.newDocument();
-			
+			Element root=document.createElement("root");
+
 			//EXAMEVENT
-			Element rootExamEvent = document.createElement("examevent");
+			Element rootExamEvent = document.createElement("exameventClass");
 			for(int i=0; i<ModeleExam.instance().size(); i++){
 				ExamEvent e=ModeleExam.instance().get(i);
 				Element exam = document.createElement("exam");
@@ -85,10 +86,10 @@ public class XMLProjectWriter {
 				exam.appendChild(doc);
 				rootExamEvent.appendChild(exam);
 			}
-			document.appendChild(rootExamEvent);
+			root.appendChild(rootExamEvent);
 			
 			//PERSON
-			Element rootPerson=document.createElement("person");
+			Element rootPerson=document.createElement("personClass");
 			for(int i=0; i<ModelePerson.instance().size(); i++) {
 				Person person=ModelePerson.instance().get(i);
 				Element personChild=document.createElement("p");
@@ -100,10 +101,10 @@ public class XMLProjectWriter {
 				personChild.setAttribute("email", person.getEmail());
 				rootPerson.appendChild(personChild);
 			}
-			document.appendChild(rootPerson);
+			root.appendChild(rootPerson);
 			
 			//CLASSROOM
-			Element rootClassroom=document.createElement("classroom");
+			Element rootClassroom=document.createElement("classroomClass");
 			for(int i=0; i<ModeleClassroom.instance().size(); i++) {
 				Element classroomChild=document.createElement("c");
 				Classroom classroom=ModeleClassroom.instance().get(i);
@@ -111,10 +112,10 @@ public class XMLProjectWriter {
 				classroomChild.setAttribute("numero", classroom.getClassRoomNumber());
 				rootClassroom.appendChild(classroomChild);
 			}
-			document.appendChild(rootClassroom);
+			root.appendChild(rootClassroom);
 			
 			//DOCUMENT
-			Element rootDocument=document.createElement("document");
+			Element rootDocument=document.createElement("documentClass");
 			for(int i=0; i<ModeleDocument.instance().size(); i++) {
 				edu.iut.app.Document d=ModeleDocument.instance().get(i);
 				Element documentChild=document.createElement("d");
@@ -122,7 +123,9 @@ public class XMLProjectWriter {
 				documentChild.setAttribute("uri", d.getDocumentURI());
 				rootDocument.appendChild(documentChild);
 			}
-			document.appendChild(rootDocument);
+			root.appendChild(rootDocument);
+			
+			document.appendChild(root);
 			
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
@@ -141,7 +144,4 @@ public class XMLProjectWriter {
 			e.printStackTrace();
 		}
 	}
-
-	
-	
 }
