@@ -2,6 +2,8 @@ package edu.iut.gui.control;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
 import javax.swing.JOptionPane;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter.DEFAULT;
@@ -27,6 +29,15 @@ public class ControlSchedulerFrame implements ActionListener {
 		case "Month" : vue.afficherMonth();break;
 		case "Day" : vue.afficherDay();break;
 		case "Week" : vue.afficherWeek();break;
+		case "Load" : try {
+				vue.getXmlBegin().load(new File("save.xml"));
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			vue.initialiserListes();
+			break;
+		case "Save" : vue.getXmlQuit().save(new File("save.xml"));
+			break;
 		default : JOptionPane.showMessageDialog(vue, "L'option '"+e.getActionCommand()+"' n'existe pas encore.", "Erreur", JOptionPane.INFORMATION_MESSAGE);break;
 		}
 	}

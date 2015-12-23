@@ -27,5 +27,4 @@ public class VuePerson extends JPanel {
 		add(new JLabel("téléphone"));
 		add(new JLabel(p.getPhone()));
 	}
-
 }

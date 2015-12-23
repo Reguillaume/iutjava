@@ -18,7 +18,7 @@ import javax.swing.JSplitPane;
 import edu.iut.gui.control.ControlSchedulerFrame;
 import edu.iut.gui.modele.ListeExamEvent;
 import edu.iut.gui.widget.agenda.AgendaPanelFactory;
-import edu.iut.gui.widget.agenda.ControlAgendaViewPanel;
+import edu.iut.gui.widget.agenda.AgendaViewPanel;
 import edu.iut.gui.widget.agenda.AgendaPanelFactory.ActiveView;
 import edu.iut.gui.widget.vue.VueCreerExam;
 import edu.iut.gui.widget.vue.VueTabNavigation;
@@ -38,7 +38,7 @@ public class SchedulerFrame extends JFrame {
 	JPanel dayView;
 	JPanel weekView;
 	JPanel monthView;
-	ControlAgendaViewPanel agendaViewPanel;
+	AgendaViewPanel agendaViewPanel;
 	
 	XMLProjectWriter xmlQuit=new XMLProjectWriter();
 	XMLProjectReader xmlBegin=new XMLProjectReader();
@@ -47,7 +47,7 @@ public class SchedulerFrame extends JFrame {
 		contentPane = new JPanel();
 		layerLayout = new CardLayout();
 		contentPane.setLayout(layerLayout);
-		agendaViewPanel = new ControlAgendaViewPanel(layerLayout,contentPane);
+		agendaViewPanel = new AgendaViewPanel(layerLayout,contentPane);
 		agendaPanelFactory = new AgendaPanelFactory();
 		dayView = agendaPanelFactory.getAgendaView(ActiveView.DAY_VIEW);
 		weekView = agendaPanelFactory.getAgendaView(ActiveView.WEEK_VIEW);
@@ -133,7 +133,7 @@ public class SchedulerFrame extends JFrame {
 		super(title);
 		addWindowListener (new WindowAdapter(){
 			public void windowClosing (WindowEvent e){
-				xmlQuit.save(ListeExamEvent.instance(), new File("save.xml"));
+				xmlQuit.save(new File("save.xml"));
 				System.exit(0);
 			}
 			
@@ -157,4 +157,12 @@ public class SchedulerFrame extends JFrame {
 	public void afficherMonth() { layerLayout.show(contentPane, ActiveView.MONTH_VIEW.name());}
 	public void afficherDay() { layerLayout.show(contentPane, ActiveView.DAY_VIEW.name());}
 	public void afficherWeek() { layerLayout.show(contentPane, ActiveView.WEEK_VIEW.name());}
+
+	public XMLProjectWriter getXmlQuit() {
+		return xmlQuit;
+	}
+
+	public XMLProjectReader getXmlBegin() {
+		return xmlBegin;
+	}
 }

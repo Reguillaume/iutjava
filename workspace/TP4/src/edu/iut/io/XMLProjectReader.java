@@ -34,7 +34,12 @@ public class XMLProjectReader {
 	
 	public void load(java.io.File xmlfile) throws IOException {
 		ArrayList<ModeleExamEvent> data = new ArrayList<ModeleExamEvent>();
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();   
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		ListeClassroom.instance().clear();
+		ListeDocument.instance().clear();
+		ListeExamEvent.instance().clear();
+		ListePerson.instance().clear();
+		
 		try {
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			Document document= builder.parse(xmlfile);

@@ -35,7 +35,7 @@ public class XMLProjectWriter {
 	public XMLProjectWriter() {		
 	}
 	
-	public void save(ArrayList<ModeleExamEvent> data, java.io.File xmlfile) {
+	public void save(java.io.File xmlfile) {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder = null;
 		
