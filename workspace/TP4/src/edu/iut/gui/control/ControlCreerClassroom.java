@@ -25,8 +25,11 @@ public class ControlCreerClassroom implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		switch(e.getActionCommand()) {
-		case "Créer" : 
-			if(JOptionPane.showConfirmDialog(null, "Êtes-vous sûr de vouloir créer la salle "+vue.getNomField().getText()+" ?", "Confirmation", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
+		case "Créer" :
+			if(vue.getNomField().getText().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Il faut entrer un nom de salle.", "Erreur", JOptionPane.OK_OPTION);
+			}
+			else if(JOptionPane.showConfirmDialog(null, "Êtes-vous sûr de vouloir créer la salle "+vue.getNomField().getText()+" ?", "Confirmation", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
 				ListeClassroom.instance().add(new ModeleClassroom(vue.getNomField().getText()));
 			}
 			vue.nettoyerChamps();

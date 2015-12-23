@@ -29,19 +29,26 @@ public class ControlTabPerson implements ActionListener {
 		case "Créer" :
 			String msg;
 			ModelePerson person=null;
-			if(vue.getFonctionBox().getSelectedItem()==PersonFunction.JURY.toString()) {
-				msg="Êtes-vous sûr de vouloir créer le jury "+vue.getNomField().getText()+" "+vue.getPrenomField().getText()+" ?";
-				person=new ModelePerson(PersonFunction.JURY, vue.getNomField().getText(), vue.getPrenomField().getText(), vue.getEmailField().getText(), vue.getPhoneField().getText());
+			if(vue.getNomField().getText().isEmpty() || vue.getPrenomField().getText().isEmpty() || vue.getPhoneField().getText().isEmpty() || vue.getEmailField().getText().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Il faut remplir tous les champs.", "Erreur", JOptionPane.OK_OPTION);
 			}
 			else {
-				msg="Êtes-vous sûr de vouloir créer l'étudiant "+vue.getNomField().getText()+" "+vue.getPrenomField().getText()+" ?";
-				person=new ModelePerson(PersonFunction.STUDENT, vue.getNomField().getText(), vue.getPrenomField().getText(), vue.getEmailField().getText(), vue.getPhoneField().getText());
-			}
-			if(JOptionPane.showConfirmDialog(null, msg, "Confirmation", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
-				ListePerson.instance().add(person);
-				vue.initialiserListe();
-				vue.listePage();
-				vue.nettoyerChampsCreer();
+				String prenom=vue.getPrenomField().getText().substring(0, 1).toUpperCase() + vue.getPrenomField().getText().substring(1);
+				String nom=vue.getNomField().getText().toUpperCase();
+				if(vue.getFonctionBox().getSelectedItem()==PersonFunction.JURY.toString()) {
+					msg="Êtes-vous sûr de vouloir créer le jury "+nom+" "+prenom+" ?";
+					person=new ModelePerson(PersonFunction.JURY, nom, prenom, vue.getEmailField().getText(), vue.getPhoneField().getText());
+				}
+				else {
+					msg="Êtes-vous sûr de vouloir créer l'étudiant "+nom+" "+prenom+" ?";
+					person=new ModelePerson(PersonFunction.STUDENT, nom, prenom, vue.getEmailField().getText(), vue.getPhoneField().getText());
+				}
+				if(JOptionPane.showConfirmDialog(null, msg, "Confirmation", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
+					ListePerson.instance().add(person);
+					vue.initialiserListe();
+					vue.listePage();
+					vue.nettoyerChampsCreer();
+				}
 			}
 			break;
 		case "Ajouter" :
@@ -49,7 +56,9 @@ public class ControlTabPerson implements ActionListener {
 			break;
 			
 		case "Supprimer" :
-			if(JOptionPane.showConfirmDialog(null, "Êtes-vous sûr de supprimer "+vue.getPersonList().getSelectedValue()+" ?", "Confirmation", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) vue.supprimerSelectionListe();
+			if(!vue.getPersonList().isSelectionEmpty()) {
+				if(JOptionPane.showConfirmDialog(null, "Êtes-vous sûr de supprimer "+vue.getPersonList().getSelectedValue()+" ?", "Confirmation", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) vue.supprimerSelectionListe();
+			}
 			break;
 			
 		case "Effacer": 

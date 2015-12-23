@@ -111,24 +111,40 @@ public class ControlCreerExam implements ActionListener {
 			}
 			break;
 		case "Supprimer" :
-			if(JOptionPane.showConfirmDialog(null, "Êtes vous sur de vouloir supprimer l'examen de "+vue.getExamList().getSelectedValue(), "Confirmation", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
-				vue.supprimerSelectionListe();
+			if(!vue.getExamList().isSelectionEmpty()) {
+				if(JOptionPane.showConfirmDialog(null, "Êtes vous sur de vouloir supprimer l'examen de "+vue.getExamList().getSelectedValue(), "Confirmation", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
+					vue.supprimerSelectionListe();
+				}
 			}
 			break;
 		case "Créer" :
-			ModeleExamEvent exam=new ModeleExamEvent(new Date((Integer) vue.getDateSpinner().getValue(), vue.getMonthCombo().getSelectedIndex(), vue.getNumDaysCombo().getSelectedIndex(), (Integer) vue.getHeureCombo().getSelectedItem(), 0), vue.getSelectEtudiant(), vue.getSelectJury(), vue.getSelectClassroom(), vue.getSelectDocument());
-			if(modification!=-1) {
-				if(JOptionPane.showConfirmDialog(null, "Êtes-vous sûr de vouloir modifier l'examen ?", "Confirmation", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
-					ListeExamEvent.instance().remove(vue.getExamArray().get(modification));
+			if(vue.getEtudiantList().isSelectionEmpty()) {
+				JOptionPane.showMessageDialog(null, "Il faut selectionner un étudiant.", "Erreur", JOptionPane.OK_OPTION);
+			}
+			else if(vue.getSelectJury().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Il faut selectionner au moins un jury.", "Erreur", JOptionPane.OK_OPTION);
+			}
+			else if(vue.getClassroomList().isSelectionEmpty()) {
+				JOptionPane.showMessageDialog(null, "Il faut selectionner une salle.", "Erreur", JOptionPane.OK_OPTION);
+			}
+			else if(vue.getSelectDocument().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Il faut selectionner au moins un document.", "Erreur", JOptionPane.OK_OPTION);
+			}
+			else {
+				ModeleExamEvent exam=new ModeleExamEvent(new Date((Integer) vue.getDateSpinner().getValue(), vue.getMonthCombo().getSelectedIndex(), vue.getNumDaysCombo().getSelectedIndex(), (Integer) vue.getHeureCombo().getSelectedItem(), 0), vue.getSelectEtudiant(), vue.getSelectJury(), vue.getSelectClassroom(), vue.getSelectDocument());
+				if(modification!=-1) {
+					if(JOptionPane.showConfirmDialog(null, "Êtes-vous sûr de vouloir modifier l'examen ?", "Confirmation", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
+						ListeExamEvent.instance().remove(vue.getExamArray().get(modification));
+						ListeExamEvent.instance().add(exam);
+						vue.initialiserExamList();
+						vue.showExamList();
+					}
+				}
+				else if(JOptionPane.showConfirmDialog(null, "Êtes-vous sûr de vouloir créer l'examen ?", "Confirmation", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
 					ListeExamEvent.instance().add(exam);
 					vue.initialiserExamList();
 					vue.showExamList();
 				}
-			}
-			else if(JOptionPane.showConfirmDialog(null, "Êtes-vous sûr de vouloir créer l'examen ?", "Confirmation", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
-				ListeExamEvent.instance().add(exam);
-				vue.initialiserExamList();
-				vue.showExamList();
 			}
 			break;
 		case "Rafraîchir" :

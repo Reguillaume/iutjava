@@ -214,7 +214,7 @@ public class VueTabPerson extends JPanel {
 		personModel.clear();
 		if(!(rechercherField.getText().equals(""))) {
 			for(ModelePerson p : ListePerson.instance()) {
-				if(p.getLastname().equals(rechercherField.getText().replace(" ", ""))) {
+				if(p.getLastname().equals(rechercherField.getText().replace(" ", "").toUpperCase())) {
 					personArray.add(p);
 					personModel.addElement(p.getLastname()+" "+p.getFirstname());
 				}

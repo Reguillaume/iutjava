@@ -620,7 +620,7 @@ public class VueCreerExam extends JPanel {
 			examArray.clear();
 			examModel.clear();
 			for(ModeleExamEvent event : ListeExamEvent.instance()) {
-				if(rechercherExamField.getText().replace(" " , "").equals(event.getStudent().getLastname())) {
+				if(rechercherExamField.getText().replace(" " , "").toUpperCase().equals(event.getStudent().getLastname())) {
 					examArray.add(event);
 					examModel.addElement(event.getStudent().getLastname()+" "+event.getStudent().getFirstname());
 				}
@@ -641,7 +641,7 @@ public class VueCreerExam extends JPanel {
 			etudiantArray.clear();
 			etudiantModel.clear();
 			for(ModelePerson person : ListePerson.instance()) {
-				if(rechercherEtudiantField.getText().replace(" " , "").equals(person.getLastname()) && person.getFunction().equals(PersonFunction.STUDENT)) {
+				if(rechercherEtudiantField.getText().replace(" " , "").toUpperCase().equals(person.getLastname()) && person.getFunction().equals(PersonFunction.STUDENT)) {
 					etudiantArray.add(person);
 					etudiantModel.addElement(person.getLastname()+" "+person.getFirstname());
 				}
@@ -660,7 +660,7 @@ public class VueCreerExam extends JPanel {
 			allJuryArray.clear();
 			allJuryModel.clear();
 			for(ModelePerson person : ListePerson.instance()) {
-				if(rechercherJuryField.getText().replace(" " , "").equals(person.getLastname()) && person.getFunction().equals(PersonFunction.JURY)) {
+				if(rechercherJuryField.getText().replace(" " , "").toUpperCase().equals(person.getLastname()) && person.getFunction().equals(PersonFunction.JURY)) {
 					allJuryArray.add(person);
 					allJuryModel.addElement(person.getLastname()+" "+person.getFirstname());
 				}
@@ -773,6 +773,24 @@ public class VueCreerExam extends JPanel {
 	 */
 	public ArrayList<ModeleExamEvent> getExamArray() {
 		return examArray;
+	}
+
+	/**
+	 * Retourne la liste de selection des étudiants.
+	 * @return Liste de ModelePerson sous forme d'un JList de chaîne de caractères.
+	 * @see ModelePerson
+	 */
+	public JList<String> getEtudiantList() {
+		return etudiantList;
+	}
+	
+	/**
+	 * Retourne la liste de selection des salle de classe.
+	 * @return Liste de ModeleClassroom sous forme d'un JList de chaîne de caractères.
+	 * @see ModeleClassroom
+	 */
+	public JList<String> getClassroomList() {
+		return classroomList;
 	}
 
 	public JComboBox<String> getMonthCombo() {
