@@ -49,9 +49,9 @@ public class SchedulerFrame extends JFrame {
 		contentPane.setLayout(layerLayout);
 		agendaViewPanel = new AgendaViewPanel(layerLayout,contentPane);
 		agendaPanelFactory = new AgendaPanelFactory();
-		dayView = agendaPanelFactory.getAgendaView(ActiveView.DAY_VIEW);
-		weekView = agendaPanelFactory.getAgendaView(ActiveView.WEEK_VIEW);
-		monthView = agendaPanelFactory.getAgendaView(ActiveView.MONTH_VIEW);
+		dayView = agendaPanelFactory.getAgendaView(ActiveView.DAY_VIEW, agendaViewPanel.getOnglets().getOnglets());
+		weekView = agendaPanelFactory.getAgendaView(ActiveView.WEEK_VIEW, agendaViewPanel.getOnglets().getOnglets());
+		monthView = agendaPanelFactory.getAgendaView(ActiveView.MONTH_VIEW, agendaViewPanel.getOnglets().getOnglets());
 		
 		contentPane.add(dayView,ActiveView.DAY_VIEW.name());
 		contentPane.add(weekView,ActiveView.WEEK_VIEW.name());

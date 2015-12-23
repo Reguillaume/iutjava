@@ -2,6 +2,7 @@ package edu.iut.gui.widget.agenda;
 
 import java.awt.GridLayout;
 
+import javax.swing.JTabbedPane;
 
 import edu.iut.gui.widget.agenda.AgendaPanelFactory.ActiveView;
 import edu.iut.app.ApplicationSession;
@@ -35,12 +36,12 @@ public class WeekPanel extends EventPanel {
 		}
 	}
 	
-	public WeekPanel() {
+	public WeekPanel(JTabbedPane onglets) {
 		super(ActiveView.WEEK_VIEW);
 		GridLayout daysOfWeekLayout = new GridLayout(1,7);		
 		this.setLayout(daysOfWeekLayout);
 		for (int di = 0;di<7;di++)	{
-			this.add(new DayPanel(ActiveView.WEEK_VIEW,WeekDayNames.values()[di+1]));
+			this.add(new DayPanel(ActiveView.WEEK_VIEW,WeekDayNames.values()[di+1], onglets));
 		}
 	}
 }
