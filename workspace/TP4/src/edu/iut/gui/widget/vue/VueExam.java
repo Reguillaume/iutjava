@@ -23,7 +23,7 @@ public class VueExam extends JPanel {
 		dateBorderPanel.add(new JLabel("DATE"), BorderLayout.NORTH);
 		JPanel dateGridPanel=new JPanel(new GridLayout(1, 2));
 		dateGridPanel.add(new JLabel("date"));
-		dateGridPanel.add(new JLabel(exam.getExamDate().toString()));
+		dateGridPanel.add(new JLabel(String.valueOf(exam.getExamDate().getDate()+1)+"/"+String.valueOf(exam.getExamDate().getMonth()+1)+"/"+exam.getExamDate().getYear()+" à "+exam.getExamDate().getHours()+"h"));
 		dateBorderPanel.add(dateGridPanel, BorderLayout.CENTER);
 		
 		//STUDENT

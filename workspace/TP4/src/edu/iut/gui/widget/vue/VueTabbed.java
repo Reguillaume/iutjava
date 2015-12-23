@@ -32,4 +32,8 @@ public class VueTabbed extends JPanel {
 		
 		add(onglets);
 	}
+
+	public JTabbedPane getOnglets() {
+		return onglets;
+	}
 }

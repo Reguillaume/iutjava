@@ -116,7 +116,7 @@ public class ControlCreerExam implements ActionListener {
 			}
 			break;
 		case "Créer" :
-			ExamEvent exam=new ExamEvent(new Date(), vue.getSelectEtudiant(), vue.getSelectJury(), vue.getSelectClassroom(), vue.getSelectDocument());
+			ExamEvent exam=new ExamEvent(new Date((Integer) vue.getDateSpinner().getValue(), vue.getMonthCombo().getSelectedIndex(), vue.getNumDaysCombo().getSelectedIndex()), vue.getSelectEtudiant(), vue.getSelectJury(), vue.getSelectClassroom(), vue.getSelectDocument());
 			if(modification!=-1) {
 				if(JOptionPane.showConfirmDialog(null, "Êtes-vous sûr de vouloir modifier l'examen ?", "Confirmation", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
 					ModeleExam.instance().remove(vue.getExamArray().get(modification));

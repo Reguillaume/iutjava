@@ -55,7 +55,7 @@ public class XMLProjectWriter {
 				
 				Element date=document.createElement("date");
 				date.setAttribute("heure", String.valueOf(e.getExamDate().getHours()));
-				date.setAttribute("jour", String.valueOf(e.getExamDate().getDay()));
+				date.setAttribute("jour", String.valueOf(e.getExamDate().getDate()));
 				date.setAttribute("mois", String.valueOf(e.getExamDate().getMonth()));
 				date.setAttribute("annee", String.valueOf(e.getExamDate().getYear()));
 

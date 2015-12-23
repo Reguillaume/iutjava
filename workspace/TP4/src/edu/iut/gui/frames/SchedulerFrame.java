@@ -19,6 +19,9 @@ import edu.iut.gui.modele.ModeleExam;
 import edu.iut.gui.widget.agenda.AgendaPanelFactory;
 import edu.iut.gui.widget.agenda.ControlAgendaViewPanel;
 import edu.iut.gui.widget.agenda.AgendaPanelFactory.ActiveView;
+import edu.iut.gui.widget.vue.VueCreerExam;
+import edu.iut.gui.widget.vue.VueTabNavigation;
+import edu.iut.gui.widget.vue.VueTabPerson;
 import edu.iut.io.XMLProjectReader;
 import edu.iut.io.XMLProjectWriter;
 
@@ -34,6 +37,7 @@ public class SchedulerFrame extends JFrame {
 	JPanel dayView;
 	JPanel weekView;
 	JPanel monthView;
+	ControlAgendaViewPanel agendaViewPanel;
 	
 	XMLProjectWriter xmlQuit=new XMLProjectWriter();
 	XMLProjectReader xmlBegin=new XMLProjectReader();
@@ -42,7 +46,7 @@ public class SchedulerFrame extends JFrame {
 		contentPane = new JPanel();
 		layerLayout = new CardLayout();
 		contentPane.setLayout(layerLayout);
-		ControlAgendaViewPanel agendaViewPanel = new ControlAgendaViewPanel(layerLayout,contentPane);
+		agendaViewPanel = new ControlAgendaViewPanel(layerLayout,contentPane);
 		agendaPanelFactory = new AgendaPanelFactory();
 		dayView = agendaPanelFactory.getAgendaView(ActiveView.DAY_VIEW);
 		weekView = agendaPanelFactory.getAgendaView(ActiveView.WEEK_VIEW);
@@ -135,12 +139,18 @@ public class SchedulerFrame extends JFrame {
 			public void windowOpened(WindowEvent e) {
 				try {
 					xmlBegin.load(new File("save.xml"));
+					initialiserListes();
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
 			}
 		});
 		setupUI();
+	}
+	
+	public void initialiserListes() {
+		((VueTabNavigation) agendaViewPanel.getOnglets().getOnglets().getComponentAt(0)).getCreerExamPanel().initialiserExamList();
+		((VueTabPerson) agendaViewPanel.getOnglets().getOnglets().getComponentAt(1)).initialiserListe();
 	}
 	
 	public void afficherMonth() { layerLayout.show(contentPane, ActiveView.MONTH_VIEW.name());}

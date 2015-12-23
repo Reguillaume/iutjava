@@ -10,14 +10,18 @@ public class ControlAgendaViewPanel extends JPanel {
 
 	CardLayout agendaViewLayout;
 	JPanel contentPane;
+	VueTabbed onglets;
 	
 	public ControlAgendaViewPanel(CardLayout layerLayout, final JPanel contentPane) {
-		//Spinner+Combo
 		this.agendaViewLayout = layerLayout;
 		this.contentPane = contentPane;
 		
-		VueTabbed onglets=new VueTabbed();
+		onglets=new VueTabbed();
 		add(onglets);
+	}
+
+	public VueTabbed getOnglets() {
+		return onglets;
 	}
 	
 }
