@@ -1,3 +1,4 @@
+
 package edu.iut.gui.frames;
 
 import java.awt.CardLayout;
@@ -15,7 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
 import edu.iut.gui.control.ControlSchedulerFrame;
-import edu.iut.gui.modele.ModeleExam;
+import edu.iut.gui.modele.ListeExamEvent;
 import edu.iut.gui.widget.agenda.AgendaPanelFactory;
 import edu.iut.gui.widget.agenda.ControlAgendaViewPanel;
 import edu.iut.gui.widget.agenda.AgendaPanelFactory.ActiveView;
@@ -132,7 +133,7 @@ public class SchedulerFrame extends JFrame {
 		super(title);
 		addWindowListener (new WindowAdapter(){
 			public void windowClosing (WindowEvent e){
-				xmlQuit.save(ModeleExam.instance(), new File("save.xml"));
+				xmlQuit.save(ListeExamEvent.instance(), new File("save.xml"));
 				System.exit(0);
 			}
 			

@@ -14,8 +14,8 @@ import javax.swing.JTextField;
 import edu.iut.gui.control.ControlCreerDocument;
 
 /**
- * Classe permettant d'afficher des widgets pour créer un document.
- * @see Document
+ * Classe permettant d'afficher des widgets pour crï¿½er un document.
+ * @see ModeleDocument
  * @author Guizmo
  *
  */
@@ -26,7 +26,7 @@ public class VueCreerDocument extends JPanel {
 	private JTextField uriField;
 	
 	/**
-	 * Bouton pour créer un document à partir du champ de texte.
+	 * Bouton pour crï¿½er un document ï¿½ partir du champ de texte.
 	 */
 	private JButton creerButton;
 	

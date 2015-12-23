@@ -17,13 +17,13 @@ import javax.swing.JTextField;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import edu.iut.app.Person;
-import edu.iut.app.Person.PersonFunction;
 import edu.iut.gui.control.ControlTabPerson;
+import edu.iut.gui.modele.ListePerson;
 import edu.iut.gui.modele.ModelePerson;
+import edu.iut.gui.modele.ModelePerson.PersonFunction;
 
 /**
- * Classe permettant d'afficher la liste des étudiants et la possibilité d'en créer.
+ * Classe permettant d'afficher la liste des ï¿½tudiants et la possibilitï¿½ d'en crï¿½er.
  * @author Guizmo
  *
  */
@@ -37,7 +37,7 @@ public class VueTabPerson extends JPanel {
 	private JList<String> personList=null;
 	private DefaultListModel<String> personModel=new DefaultListModel<>();
 	private CardLayout gestionnaire;
-	private ArrayList<Person> personArray=new ArrayList<>();
+	private ArrayList<ModelePerson> personArray=new ArrayList<>();
 	private JPanel descPanel;
 	
 	//Creer
@@ -150,21 +150,21 @@ public class VueTabPerson extends JPanel {
 	}
 	
 	/**
-	 * Initialise la liste d'étudiants ou de jurys à partir des personnes stockées dans l'application.
-	 * @see Person
+	 * Initialise la liste d'ï¿½tudiants ou de jurys ï¿½ partir des personnes stockï¿½es dans l'application.
 	 * @see ModelePerson
+	 * @see ListePerson
 	 */
 	public void initialiserListe() {
 		personModel.clear();
 		personArray.clear();
-		for(Person p : ModelePerson.instance()) {
+		for(ModelePerson p : ListePerson.instance()) {
 			personModel.addElement(p.getLastname()+" "+p.getFirstname());
 			personArray.add(p);
 		}
 	}
 	
 	/**
-	 * Efface le panel où se trouve la description des personnes.
+	 * Efface le panel oï¿½ se trouve la description des personnes.
 	 */
 	public void effacerDesc() {
 		descPanel.removeAll();
@@ -173,30 +173,30 @@ public class VueTabPerson extends JPanel {
 	}
 	
 	/**
-	 * Supprime la personne selectionné dans la liste.
+	 * Supprime la personne selectionnï¿½ dans la liste.
 	 */
 	public void supprimerSelectionListe() {
-		ModelePerson.instance().remove(personArray.get(personList.getSelectedIndex()));
+		ListePerson.instance().remove(personArray.get(personList.getSelectedIndex()));
 		personModel.remove(personList.getSelectedIndex());
 		effacerDesc();
 	}
 	
 	/**
-	 * Affiche la page pour créer une personne.
+	 * Affiche la page pour crï¿½er une personne.
 	 */
 	public void creerPage() {
 		gestionnaire.show(this, "creer");
 	}
 	
 	/**
-	 * Affiche le panel où il y a la liste des personnes.
+	 * Affiche le panel oï¿½ il y a la liste des personnes.
 	 */
 	public void listePage() {
 		gestionnaire.show(this, "liste");
 	}
 	
 	/**
-	 * Efface le contenu de tous les champs du panel pour créer une personne.
+	 * Efface le contenu de tous les champs du panel pour crï¿½er une personne.
 	 */
 	public void nettoyerChampsCreer() {
 		nomField.setText("");
@@ -213,7 +213,7 @@ public class VueTabPerson extends JPanel {
 		personArray.clear();
 		personModel.clear();
 		if(!(rechercherField.getText().equals(""))) {
-			for(Person p : ModelePerson.instance()) {
+			for(ModelePerson p : ListePerson.instance()) {
 				if(p.getLastname().equals(rechercherField.getText().replace(" ", ""))) {
 					personArray.add(p);
 					personModel.addElement(p.getLastname()+" "+p.getFirstname());

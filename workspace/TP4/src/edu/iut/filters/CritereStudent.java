@@ -2,13 +2,13 @@ package edu.iut.filters;
 
 import java.util.ArrayList;
 
-import edu.iut.app.ExamEvent;
 import edu.iut.filters.Critere;
+import edu.iut.gui.modele.ModeleExamEvent;
 
 /**
- * Classe permettant de filter les examens par étudiant.
- * @see ExamEvent
- * @see Person
+ * Classe permettant de filter les examens par ï¿½tudiant.
+ * @see ModeleExamEvent
+ * @see ModelePerson
  * @author Guizmo
  *
  */
@@ -17,10 +17,10 @@ public class CritereStudent implements Critere {
 	private String prenom;
 	
 	@Override
-	public ArrayList<ExamEvent> meetCritere(ArrayList<ExamEvent> ex) {
-		ArrayList<ExamEvent> newEx=new ArrayList<ExamEvent>();
+	public ArrayList<ModeleExamEvent> meetCritere(ArrayList<ModeleExamEvent> ex) {
+		ArrayList<ModeleExamEvent> newEx=new ArrayList<ModeleExamEvent>();
 		
-		for(ExamEvent e : ex) {
+		for(ModeleExamEvent e : ex) {
 			if(e.getStudent().getFirstname()==prenom && e.getStudent().getLastname()==nom) newEx.add(e);
 		}
 		return newEx;

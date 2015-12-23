@@ -1,20 +1,47 @@
 package edu.iut.gui.modele;
 
-import java.util.ArrayList;
-
-import edu.iut.app.Classroom;
-
 /**
- * Classe permettant de stocker toutes les salles de classe.
- * @Classroom
+ * Classe repr�sentant une salle de classe.
  * @author Guizmo
  *
  */
-public class ModeleClassroom extends ArrayList<Classroom> {
-	private static ModeleClassroom classrooms=null;
+public class ModeleClassroom {
 	
-	public static ModeleClassroom instance() {
-		if(classrooms==null) classrooms=new ModeleClassroom();
-		return classrooms;
+	/**
+	 * Initialise une salle de classe qui ne poss�de pas de nom : 'non affect�'.
+	 */
+	public ModeleClassroom() {
+		classRoomNumber="not affected";
 	}
+	
+	/**
+	 * Initialise une salle de classe � partir du nom en param�tre.
+	 * @param classRoomNumber
+	 * 	Nom de la salle de classe sous forme de cha�ne de caract�res.
+	 */
+	public ModeleClassroom(String classRoomNumber) {
+	this.classRoomNumber=classRoomNumber;
+	}
+	
+	/**
+	 * Remplace le nom de la salle de classe par le nom en param�tre.
+	 * @param number
+	 * 	Nom de la salle de classe sous forme de cha�ne de caract�res.
+	 */
+	public void setClassroomNumber(String number) {
+		classRoomNumber=number;
+	}
+	
+	/**
+	 * Retourne le nom de la salle de classe.
+	 * @return Nom de la salle de classe sous forme de cha�ne de caract�res.
+	 */
+	public String getClassRoomNumber() {
+		return classRoomNumber;
+	}
+	
+	/**
+	 * Nom de la salle de classe sous forme de cha�ne de caract�res.
+	 */
+	protected String classRoomNumber;
 }

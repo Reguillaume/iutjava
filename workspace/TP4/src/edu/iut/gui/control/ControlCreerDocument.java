@@ -5,8 +5,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
-import edu.iut.app.Document;
 import edu.iut.gui.modele.ModeleDocument;
+import edu.iut.gui.modele.ListeDocument;
 import edu.iut.gui.widget.vue.VueCreerDocument;
 
 /**
@@ -27,7 +27,7 @@ public class ControlCreerDocument implements ActionListener {
 		switch(e.getActionCommand()) {
 		case "Créer" :
 			if(JOptionPane.showConfirmDialog(null, "Êtes-vous sûr de vouloir créer le document "+vue.getUriField().getText()+" ?", "Confirmation", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
-				ModeleDocument.instance().add(new Document(vue.getUriField().getText()));
+				ListeDocument.instance().add(new ModeleDocument(vue.getUriField().getText()));
 			}
 			vue.nettoyerChamps();
 			break;

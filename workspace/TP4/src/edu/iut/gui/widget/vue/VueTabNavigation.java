@@ -100,6 +100,10 @@ public class VueTabNavigation extends JPanel {
 		return numDaysCombo;
 	}
 
+	public JComboBox<Integer> getHeureCombo() {
+		return heureCombo;
+	}
+
 	public VueCreerExam getCreerExamPanel() {
 		return creerExamPanel;
 	}

@@ -18,13 +18,13 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 
-import edu.iut.app.Classroom;
-import edu.iut.app.ExamEvent;
-import edu.iut.app.Person;
 import edu.iut.gui.modele.ModeleClassroom;
-import edu.iut.gui.modele.ModeleDocument;
-import edu.iut.gui.modele.ModeleExam;
+import edu.iut.gui.modele.ModeleExamEvent;
+import edu.iut.gui.modele.ListeClassroom;
+import edu.iut.gui.modele.ListeDocument;
+import edu.iut.gui.modele.ListeExamEvent;
 import edu.iut.gui.modele.ModelePerson;
+import edu.iut.gui.modele.ListePerson;
 
 
 
@@ -35,7 +35,7 @@ public class XMLProjectWriter {
 	public XMLProjectWriter() {		
 	}
 	
-	public void save(ArrayList<ExamEvent> data, java.io.File xmlfile) {
+	public void save(ArrayList<ModeleExamEvent> data, java.io.File xmlfile) {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder = null;
 		
@@ -48,8 +48,8 @@ public class XMLProjectWriter {
 
 			//EXAMEVENT
 			Element rootExamEvent = document.createElement("exameventClass");
-			for(int i=0; i<ModeleExam.instance().size(); i++){
-				ExamEvent e=ModeleExam.instance().get(i);
+			for(int i=0; i<ListeExamEvent.instance().size(); i++){
+				ModeleExamEvent e=ListeExamEvent.instance().get(i);
 				Element exam = document.createElement("exam");
 				exam.setAttribute("id", String.valueOf(i));
 				
@@ -60,22 +60,22 @@ public class XMLProjectWriter {
 				date.setAttribute("annee", String.valueOf(e.getExamDate().getYear()));
 
 				Element etudiant = document.createElement("etudiant");
-				etudiant.setAttribute("id", String.valueOf(ModelePerson.instance().indexOf(e.getStudent())));
+				etudiant.setAttribute("id", String.valueOf(ListePerson.instance().indexOf(e.getStudent())));
 				
 				Element jury = document.createElement("jury");
-				for(Person p: e.getJury()){
+				for(ModelePerson p: e.getJury()){
 					Element person = document.createElement("person");
-					person.setAttribute("id", String.valueOf(ModelePerson.instance().indexOf(p)));
+					person.setAttribute("id", String.valueOf(ListePerson.instance().indexOf(p)));
 					jury.appendChild(person);
 				}
 				
 				Element classroom = document.createElement("classroom");
-				classroom.setAttribute("id", String.valueOf(ModeleClassroom.instance().indexOf(e.getClassroom())));
+				classroom.setAttribute("id", String.valueOf(ListeClassroom.instance().indexOf(e.getClassroom())));
 				
 				Element doc = document.createElement("document");
-				for(edu.iut.app.Document d: e.getDocuments()){
+				for(edu.iut.gui.modele.ModeleDocument d: e.getDocuments()){
 					Element doc2 = document.createElement("doc");
-					doc2.setAttribute("id", String.valueOf(ModeleDocument.instance().indexOf(d)));
+					doc2.setAttribute("id", String.valueOf(ListeDocument.instance().indexOf(d)));
 					doc.appendChild(doc2);
 				}
 				
@@ -90,8 +90,8 @@ public class XMLProjectWriter {
 			
 			//PERSON
 			Element rootPerson=document.createElement("personClass");
-			for(int i=0; i<ModelePerson.instance().size(); i++) {
-				Person person=ModelePerson.instance().get(i);
+			for(int i=0; i<ListePerson.instance().size(); i++) {
+				ModelePerson person=ListePerson.instance().get(i);
 				Element personChild=document.createElement("p");
 				personChild.setAttribute("id", String.valueOf(i));
 				personChild.setAttribute("fonction", person.getFunction().name());
@@ -105,9 +105,9 @@ public class XMLProjectWriter {
 			
 			//CLASSROOM
 			Element rootClassroom=document.createElement("classroomClass");
-			for(int i=0; i<ModeleClassroom.instance().size(); i++) {
+			for(int i=0; i<ListeClassroom.instance().size(); i++) {
 				Element classroomChild=document.createElement("c");
-				Classroom classroom=ModeleClassroom.instance().get(i);
+				ModeleClassroom classroom=ListeClassroom.instance().get(i);
 				classroomChild.setAttribute("id", String.valueOf(i));
 				classroomChild.setAttribute("numero", classroom.getClassRoomNumber());
 				rootClassroom.appendChild(classroomChild);
@@ -116,8 +116,8 @@ public class XMLProjectWriter {
 			
 			//DOCUMENT
 			Element rootDocument=document.createElement("documentClass");
-			for(int i=0; i<ModeleDocument.instance().size(); i++) {
-				edu.iut.app.Document d=ModeleDocument.instance().get(i);
+			for(int i=0; i<ListeDocument.instance().size(); i++) {
+				edu.iut.gui.modele.ModeleDocument d=ListeDocument.instance().get(i);
 				Element documentChild=document.createElement("d");
 				documentChild.setAttribute("id", String.valueOf(i));
 				documentChild.setAttribute("uri", d.getDocumentURI());

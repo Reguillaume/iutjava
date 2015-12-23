@@ -1,36 +1,36 @@
-package edu.iut.app;
+package edu.iut.gui.modele;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * Classe représentant un examen.
+ * Classe reprï¿½sentant un examen.
  * @author Guizmo
  *
  */
-public class ExamEvent {
-	public ExamEvent() {		
+public class ModeleExamEvent {
+	public ModeleExamEvent() {		
 	}
 	
 	/**
-	 * Construit un examen à partir des paramètres.
+	 * Construit un examen ï¿½ partir des paramï¿½tres.
 	 * @param date
 	 * 	Une date sous forme de Date
 	 * @see java.util.Date
 	 * @param person
-	 * 	Un étudiant sous forme de Person.
+	 * 	Un ï¿½tudiant sous forme de Person.
 	 * @param jury
 	 * 	Une liste de jurys sous forme d'un ArrayList de Person.
-	 * @see Person
+	 * @see ModelePerson
 	 * @param classRoom
 	 *	Une salle de classe sous forme de Classroom.
-	 * @see Classroom
+	 * @see ModeleClassroom
 	 * @param document
 	 * 	Une liste de documents sous forme d'ArrayList de Document.
-	 * @see Document
+	 * @see ModeleDocument
 	 */
-	public ExamEvent(Date date, Person person, ArrayList<Person> jury,
-					Classroom classRoom, ArrayList<Document> document) {
+	public ModeleExamEvent(Date date, ModelePerson person, ArrayList<ModelePerson> jury,
+					ModeleClassroom classRoom, ArrayList<ModeleDocument> document) {
 		this.examDate=date;
 		this.student=person;
 		this.jury=jury;
@@ -45,28 +45,28 @@ public class ExamEvent {
 	protected Date examDate;
 	
 	/**
-	 * Un étudiant sous forme de Person.
-	 * @see Person
+	 * Un ï¿½tudiant sous forme de Person.
+	 * @see ModelePerson
 	 */
-	protected Person student;
+	protected ModelePerson student;
 	
 	/**
 	 * Une liste de jurys sous forme d'un ArrayList de Person.
-	 * @see Person
+	 * @see ModelePerson
 	 */
-	protected ArrayList<Person> jury;
+	protected ArrayList<ModelePerson> jury;
 	
 	/**
 	 * Une salle de classe sous forme de Classroom.
-	 * @see Classroom
+	 * @see ModeleClassroom
 	 */
-	protected Classroom classroom;
+	protected ModeleClassroom classroom;
 	
 	/**
 	 * Une liste de documents sous forme d'un ArrayList de Document.
 	 * @see Document.
 	 */
-	protected ArrayList<Document> documents;
+	protected ArrayList<ModeleDocument> documents;
 	
 	/**
 	 * Retourne la date de l'examen.
@@ -78,38 +78,38 @@ public class ExamEvent {
 	}
 	
 	/**
-	 * Retourne l'étudiant de l'examen.
-	 * @return L'étudiant de l'examen sous forme de Person.
-	 * @see Person
+	 * Retourne l'ï¿½tudiant de l'examen.
+	 * @return L'ï¿½tudiant de l'examen sous forme de Person.
+	 * @see ModelePerson
 	 */
-	public Person getStudent() {
+	public ModelePerson getStudent() {
 		return student;
 	}
 
 	/**
 	 * Retourne les jurys de l'examen.
 	 * @return La liste des jurys sous forme d'un ArrayList de Person.
-	 * @see Person
+	 * @see ModelePerson
 	 */
-	public ArrayList<Person> getJury() {
+	public ArrayList<ModelePerson> getJury() {
 		return jury;
 	}
 
 	/**
 	 * Retourn la salle de l'examen.
 	 * @return Salle de l'examen sous forme de Classroom.
-	 * @see Classroom
+	 * @see ModeleClassroom
 	 */
-	public Classroom getClassroom() {
+	public ModeleClassroom getClassroom() {
 		return classroom;
 	}
 
 	/**
 	 * Retourne les documents de l'examen.
 	 * @return La liste des documents de l'examen sous forme d'un ArrayList de Document.
-	 * @see Document
+	 * @see ModeleDocument
 	 */
-	public ArrayList<Document> getDocuments() {
+	public ArrayList<ModeleDocument> getDocuments() {
 		return documents;
 	}
 		

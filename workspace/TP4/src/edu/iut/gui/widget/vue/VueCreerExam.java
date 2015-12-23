@@ -21,20 +21,20 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.plaf.basic.BasicToolBarUI.DockingListener;
 
-import edu.iut.app.Classroom;
-import edu.iut.app.Document;
-import edu.iut.app.ExamEvent;
-import edu.iut.app.Person;
-import edu.iut.app.Person.PersonFunction;
 import edu.iut.gui.control.ControlCreerExam;
 import edu.iut.gui.modele.ModeleClassroom;
 import edu.iut.gui.modele.ModeleDocument;
+import edu.iut.gui.modele.ModeleExamEvent;
+import edu.iut.gui.modele.ListeClassroom;
+import edu.iut.gui.modele.ListeDocument;
+import edu.iut.gui.modele.ListePerson;
+import edu.iut.gui.modele.ListeExamEvent;
 import edu.iut.gui.modele.ModelePerson;
-import edu.iut.gui.modele.ModeleExam;
+import edu.iut.gui.modele.ModelePerson.PersonFunction;
 
 /**
  * Classe permettant d'afficher des widgets pour cr�er et voir des examens.
- * @see ExamEvent
+ * @see ModeleExamEvent
  * @author Guizmo
  *
  */
@@ -46,7 +46,7 @@ public class VueCreerExam extends JPanel {
 	
 	private DefaultListModel<String> examModel=new DefaultListModel<>();
 	private JList<String> examList=new JList<String>(examModel);
-	private ArrayList<ExamEvent> examArray=new ArrayList<ExamEvent>();
+	private ArrayList<ModeleExamEvent> examArray=new ArrayList<ModeleExamEvent>();
 	
 	//Liste
 	private JPanel descPanel=new JPanel();
@@ -72,28 +72,28 @@ public class VueCreerExam extends JPanel {
 	private JTextField rechercherEtudiantField=new JTextField();
 	private DefaultListModel<String> etudiantModel=new DefaultListModel<String>();
 	private JList<String> etudiantList=new JList<>(etudiantModel);
-	private ArrayList<Person> etudiantArray=new ArrayList<>();
+	private ArrayList<ModelePerson> etudiantArray=new ArrayList<>();
 	//Jury
 	private JTextField rechercherJuryField=new JTextField();
 	private DefaultListModel<String> allJuryModel=new DefaultListModel<>();
 	private JList<String> allJuryList=new JList<String>(allJuryModel);
-	private ArrayList<Person> allJuryArray=new ArrayList<>();
+	private ArrayList<ModelePerson> allJuryArray=new ArrayList<>();
 	private DefaultListModel<String> selectJuryModel=new DefaultListModel<>();
 	private JList<String> selectJuryList=new JList<String>(selectJuryModel);
-	private ArrayList<Person> selectJuryArray=new ArrayList<>();
+	private ArrayList<ModelePerson> selectJuryArray=new ArrayList<>();
 	//Classroom
 	private JTextField rechercherClassroomField=new JTextField();
 	private DefaultListModel<String> classroomModel=new DefaultListModel<>();
 	private JList<String> classroomList=new JList<String>(classroomModel);
-	private ArrayList<Classroom> classroomArray=new ArrayList<>();
+	private ArrayList<ModeleClassroom> classroomArray=new ArrayList<>();
 	//Document
 	private JTextField rechercherDocumentField=new JTextField();
 	private DefaultListModel<String> allDocumentModel=new DefaultListModel<>();
 	private JList<String> allDocumentList=new JList<String>(allDocumentModel);
-	private ArrayList<Document> allDocumentArray=new ArrayList<>();
+	private ArrayList<ModeleDocument> allDocumentArray=new ArrayList<>();
 	private DefaultListModel<String> selectDocumentModel=new DefaultListModel<>();
 	private JList<String> selectDocumentList=new JList<String>(selectDocumentModel);
-	private ArrayList<Document> selectDocumentArray=new ArrayList<>();
+	private ArrayList<ModeleDocument> selectDocumentArray=new ArrayList<>();
 	
 	//CARDLAYOUT
 	CardLayout gestionnaire=new CardLayout();
@@ -254,12 +254,12 @@ public class VueCreerExam extends JPanel {
 	
 	/**
 	 * Initialise la liste des examens.
-	 * @see ModeleExam
+	 * @see ListeExamEvent
 	 */
 	public void initialiserExamList() {
 		examArray.clear();
 		examModel.clear();
-		for(ExamEvent e : ModeleExam.instance()) {
+		for(ModeleExamEvent e : ListeExamEvent.instance()) {
 			examModel.addElement(e.getStudent().getLastname()+" "+e.getStudent().getFirstname());
 			examArray.add(e);
 		}
@@ -267,12 +267,12 @@ public class VueCreerExam extends JPanel {
 	
 	/**
 	 * Initialise la liste des �tudiants.
-	 * @see ModelePerson
+	 * @see ListePerson
 	 */
 	public void initialiserEtudiantList() {
 		etudiantArray.clear();
 		etudiantModel.clear();
-		for(Person p : ModelePerson.instance()) {
+		for(ModelePerson p : ListePerson.instance()) {
 			if(p.getFunction().equals(PersonFunction.STUDENT)) {
 				etudiantModel.addElement(p.getLastname()+" "+p.getFirstname());
 				etudiantArray.add(p);
@@ -282,14 +282,14 @@ public class VueCreerExam extends JPanel {
 	
 	/**
 	 * Initialise la liste tous les jurys ainsi que la liste o� se trouve les jurys selectionn�s par l'utilisateur.
-	 * @see ModelePerson
+	 * @see ListePerson
 	 */
 	public void initialiserJuryList() {
 		allJuryArray.clear();
 		allJuryModel.clear();
 		selectJuryModel.clear();
 		selectJuryArray.clear();
-		for(Person p : ModelePerson.instance()) {
+		for(ModelePerson p : ListePerson.instance()) {
 			if(p.getFunction().equals(PersonFunction.JURY)) {
 				allJuryModel.addElement(p.getLastname()+" "+p.getFirstname());
 				allJuryArray.add(p);
@@ -299,12 +299,12 @@ public class VueCreerExam extends JPanel {
 	
 	/**
 	 * Initialise seulement la liste de tous les jurys de l'application.
-	 * @see ModelePerson
+	 * @see ListePerson
 	 */
 	public void initialiserAllJuryList() {
 		allJuryArray.clear();
 		allJuryModel.clear();
-		for(Person person : ModelePerson.instance()) {
+		for(ModelePerson person : ListePerson.instance()) {
 			if(person.getFunction().equals(PersonFunction.JURY)) {
 				allJuryArray.add(person);
 				allJuryModel.addElement(person.getLastname()+" "+person.getFirstname());
@@ -314,12 +314,12 @@ public class VueCreerExam extends JPanel {
 	
 	/**
 	 * Initialise la liste des salles de classe.
-	 * @see ModeleClassroom
+	 * @see ListeClassroom
 	 */
 	public void initialiserClassroomList() {
 		classroomArray.clear();
 		classroomModel.clear();
-		for(Classroom c : ModeleClassroom.instance()) {
+		for(ModeleClassroom c : ListeClassroom.instance()) {
 			classroomArray.add(c);
 			classroomModel.addElement(c.getClassRoomNumber());
 		}
@@ -327,14 +327,14 @@ public class VueCreerExam extends JPanel {
 	
 	/**
 	 * Initialise la liste de tous les documents ainsi que la liste o� se trouve les documents selectionn�s par l'utilisateur.
-	 * @see Document
+	 * @see ModeleDocument
 	 */
 	public void initialiserDocumentList() {
 		allDocumentModel.clear();
 		allDocumentArray.clear();
 		selectDocumentModel.clear();
 		selectDocumentArray.clear();
-		for(Document d : ModeleDocument.instance()) {
+		for(ModeleDocument d : ListeDocument.instance()) {
 			allDocumentModel.addElement(d.getDocumentURI());
 			allDocumentArray.add(d);
 		}
@@ -346,7 +346,7 @@ public class VueCreerExam extends JPanel {
 	public void initialiserAllDocumentList() {
 		allDocumentArray.clear();
 		allDocumentModel.clear();
-		for(Document document : ModeleDocument.instance()) {
+		for(ModeleDocument document : ListeDocument.instance()) {
 			allDocumentArray.add(document);
 			allDocumentModel.addElement(document.getDocumentURI());
 		}
@@ -365,7 +365,7 @@ public class VueCreerExam extends JPanel {
 	 */
 	public void supprimerSelectionListe() {
 		if(!examList.isSelectionEmpty()) {
-			ModeleExam.instance().remove(examArray.get(examList.getSelectedIndex()));
+			ListeExamEvent.instance().remove(examArray.get(examList.getSelectedIndex()));
 			examModel.remove(examList.getSelectedIndex());
 			rafraichir();
 		}
@@ -393,9 +393,9 @@ public class VueCreerExam extends JPanel {
 	 * Fonction affichant la liste des �tudiants pr�-selectionn�e par l'�tudiant en param�tre.
 	 * @param p
 	 * 	Un �tudiant sous forme de Person
-	 * @see Person
+	 * @see ModelePerson
 	 */
-	public void showEtudiantSelect(Person p) {
+	public void showEtudiantSelect(ModelePerson p) {
 		gestionnaire.show(this, "selectEtudiant");
 		currentPanel="selectEtudiant";
 		initialiserEtudiantList();
@@ -415,13 +415,13 @@ public class VueCreerExam extends JPanel {
 	 * Fonction affichant la liste des jurys pr�-remplie par la liste de jurys en param�tre.
 	 * @param p
 	 * 	Liste de jurys sous forme d'un ArrayList de Person
-	 * @see	Person
+	 * @see	ModelePerson
 	 */
-	public void showJurySelect(ArrayList<Person> p) {
+	public void showJurySelect(ArrayList<ModelePerson> p) {
 		gestionnaire.show(this, "selectJury");
 		currentPanel="selectJury";
 		initialiserJuryList();
-		for(Person person : p) {
+		for(ModelePerson person : p) {
 			selectJuryModel.addElement(person.getLastname()+" "+person.getFirstname());
 			selectJuryArray.add(person);
 		}
@@ -440,9 +440,9 @@ public class VueCreerExam extends JPanel {
 	 * Fonction affichant la liste des salles de classe pr�-selectionn� par la salle de classe en param�tre.
 	 * @param c
 	 * 	Une salle de classe sous forme de Classroom
-	 * @see Classroom
+	 * @see ModeleClassroom
 	 */
-	public void showClassroomSelect(Classroom c) {
+	public void showClassroomSelect(ModeleClassroom c) {
 		gestionnaire.show(this, "selectClassroom");
 		currentPanel="selectClassroom";
 		initialiserClassroomList();
@@ -462,13 +462,13 @@ public class VueCreerExam extends JPanel {
 	 * Fonction affichant la liste des documents pr�-remplie par la liste de documents en param�tre.
 	 * @param d
 	 * 	Liste de documents sous forme d'un ArrayList de Document.
-	 * @see Document
+	 * @see ModeleDocument
 	 */
-	public void showDocumentSelect(ArrayList<Document> d) {
+	public void showDocumentSelect(ArrayList<ModeleDocument> d) {
 		gestionnaire.show(this, "selectDocument");
 		currentPanel="selectDocument";
 		initialiserDocumentList();
-		for(Document document : d) {
+		for(ModeleDocument document : d) {
 			selectDocumentModel.addElement(document.getDocumentURI());
 			selectDocumentArray.add(document);
 		}
@@ -619,7 +619,7 @@ public class VueCreerExam extends JPanel {
 		if(!rechercherExamField.getText().replace(" ", "").equals("")) {
 			examArray.clear();
 			examModel.clear();
-			for(ExamEvent event : ModeleExam.instance()) {
+			for(ModeleExamEvent event : ListeExamEvent.instance()) {
 				if(rechercherExamField.getText().replace(" " , "").equals(event.getStudent().getLastname())) {
 					examArray.add(event);
 					examModel.addElement(event.getStudent().getLastname()+" "+event.getStudent().getFirstname());
@@ -640,7 +640,7 @@ public class VueCreerExam extends JPanel {
 		if(!rechercherEtudiantField.getText().replace(" ", "").equals("")) {
 			etudiantArray.clear();
 			etudiantModel.clear();
-			for(Person person : ModelePerson.instance()) {
+			for(ModelePerson person : ListePerson.instance()) {
 				if(rechercherEtudiantField.getText().replace(" " , "").equals(person.getLastname()) && person.getFunction().equals(PersonFunction.STUDENT)) {
 					etudiantArray.add(person);
 					etudiantModel.addElement(person.getLastname()+" "+person.getFirstname());
@@ -659,7 +659,7 @@ public class VueCreerExam extends JPanel {
 		if(!rechercherJuryField.getText().replace(" ", "").equals("")) {
 			allJuryArray.clear();
 			allJuryModel.clear();
-			for(Person person : ModelePerson.instance()) {
+			for(ModelePerson person : ListePerson.instance()) {
 				if(rechercherJuryField.getText().replace(" " , "").equals(person.getLastname()) && person.getFunction().equals(PersonFunction.JURY)) {
 					allJuryArray.add(person);
 					allJuryModel.addElement(person.getLastname()+" "+person.getFirstname());
@@ -678,7 +678,7 @@ public class VueCreerExam extends JPanel {
 		if(!rechercherClassroomField.getText().replace(" ", "").equals("")) {
 			classroomArray.clear();
 			classroomModel.clear();
-			for(Classroom classroom : ModeleClassroom.instance()) {
+			for(ModeleClassroom classroom : ListeClassroom.instance()) {
 				if(rechercherClassroomField.getText().replace(" " , "").equals(classroom.getClassRoomNumber())) {
 					classroomArray.add(classroom);
 					classroomModel.addElement(classroom.getClassRoomNumber());
@@ -697,7 +697,7 @@ public class VueCreerExam extends JPanel {
 		if(!rechercherDocumentField.getText().replace(" ", "").equals("")) {
 			allDocumentArray.clear();
 			allDocumentModel.clear();
-			for(Document document : ModeleDocument.instance()) {
+			for(ModeleDocument document : ListeDocument.instance()) {
 				if(rechercherDocumentField.getText().replace(" " , "").equals(document.getDocumentURI())) {
 					allDocumentArray.add(document);
 					allDocumentModel.addElement(document.getDocumentURI());
@@ -713,36 +713,36 @@ public class VueCreerExam extends JPanel {
 	 * Retourne l'�tudiant selectionn�.
 	 * @return
 	 * 	L'�tudiant selectionn� sous forme de Person.
-	 * @see Person
+	 * @see ModelePerson
 	 */
-	public Person getSelectEtudiant() {
+	public ModelePerson getSelectEtudiant() {
 		return etudiantArray.get(etudiantList.getSelectedIndex());
 	}
 	
 	/**
 	 * Retourne la liste des jurys selectionn�s.
 	 * @return Liste des jurys selectionn�s sous forme d'un ArrayList de Person.
-	 * @see Person
+	 * @see ModelePerson
 	 */
-	public ArrayList<Person> getSelectJury() {
+	public ArrayList<ModelePerson> getSelectJury() {
 		return selectJuryArray;
 	}
 	
 	/**
 	 * Retourne la salle de classe selectionn�e.
 	 * @return Salle de classe selectionn�e sous forme de Classroom.
-	 * @see Classroom
+	 * @see ModeleClassroom
 	 */
-	public Classroom getSelectClassroom() {
+	public ModeleClassroom getSelectClassroom() {
 		return classroomArray.get(classroomList.getSelectedIndex());
 	}
 	
 	/**
 	 * Retourne la liste des documents selectionn�s.
 	 * @return Liste de documents selectionn�s sous forme d'un ArrayList de Document.
-	 * @see Document
+	 * @see ModeleDocument
 	 */
-	public ArrayList<Document> getSelectDocument() {
+	public ArrayList<ModeleDocument> getSelectDocument() {
 		return selectDocumentArray;
 	}
 	
@@ -769,9 +769,9 @@ public class VueCreerExam extends JPanel {
 	/**
 	 * Retourne la liste des examens.
 	 * @return Liste des examens sous forme d'un ArrayList de ExamEvent.
-	 * @see ExamEvent
+	 * @see ModeleExamEvent
 	 */
-	public ArrayList<ExamEvent> getExamArray() {
+	public ArrayList<ModeleExamEvent> getExamArray() {
 		return examArray;
 	}
 
@@ -785,5 +785,10 @@ public class VueCreerExam extends JPanel {
 
 	public JComboBox<Integer> getNumDaysCombo() {
 		return ((VueTabNavigation) onglets.getSelectedComponent()).getNumDaysCombo();
+	}
+	
+	public JComboBox<Integer> getHeureCombo() {
+		return ((VueTabNavigation) onglets.getSelectedComponent()).getHeureCombo();
+
 	}
 }

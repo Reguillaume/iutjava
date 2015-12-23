@@ -5,9 +5,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
-import edu.iut.app.Classroom;
 import edu.iut.gui.widget.vue.VueCreerClassroom;
 import edu.iut.gui.modele.ModeleClassroom;
+import edu.iut.gui.modele.ListeClassroom;
 
 /**
  * Contrôleur permettant de gérer le panel pour créer une salle de classe.
@@ -27,7 +27,7 @@ public class ControlCreerClassroom implements ActionListener {
 		switch(e.getActionCommand()) {
 		case "Créer" : 
 			if(JOptionPane.showConfirmDialog(null, "Êtes-vous sûr de vouloir créer la salle "+vue.getNomField().getText()+" ?", "Confirmation", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
-				ModeleClassroom.instance().add(new Classroom(vue.getNomField().getText()));
+				ListeClassroom.instance().add(new ModeleClassroom(vue.getNomField().getText()));
 			}
 			vue.nettoyerChamps();
 			break;

@@ -1,22 +1,85 @@
 package edu.iut.gui.modele;
 
-import java.util.ArrayList;
-
-import edu.iut.app.Person;
+import edu.iut.app.ApplicationSession;
 
 /**
- * Classe permettant de stocker tous les étudiants et jurys.
- * @see Person
+ * Classe reprï¿½sentant un ï¿½tudiant ou un jury.
  * @author Guizmo
  *
  */
-public class ModelePerson extends ArrayList<Person> {
-	private static ModelePerson persons=null;
+public class ModelePerson {
 	
-	public static ModelePerson instance() {
-		if(persons==null) {
-			persons=new ModelePerson();
+	public enum PersonFunction{
+		NONE("None"),
+		JURY(ApplicationSession.instance().getString("jury")),
+		STUDENT(ApplicationSession.instance().getString("student"));
+		
+		private String personFunction;
+		
+		PersonFunction(String personFunction) {
+			this.personFunction = personFunction;
 		}
-		return persons;
-	}	
+		
+		public String toString() {
+			return personFunction;
+		}		
+	}
+	
+	public ModelePerson() {
+		personFunction = PersonFunction.NONE;
+	}
+	
+	public ModelePerson(PersonFunction personFunction,
+				  String lastname,
+				  String firstname,
+				  String email,
+				  String phone) {
+		this.personFunction=personFunction;
+		this.firstname=firstname;
+		this.lastname=lastname;
+		this.email=email;
+		this.phone=phone;
+	}
+	
+	public void setFunction(PersonFunction function) {
+		this.personFunction = function;
+	}
+	public PersonFunction getFunction() {
+		return personFunction;
+	}
+	
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+	public String getFirstname() {
+		return firstname;
+	}
+	
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+	public String getLastname() {
+		return lastname;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getPhone() {
+		return phone;
+	}
+
+	
+	protected PersonFunction personFunction;
+	protected String firstname;
+	protected String lastname;
+	protected String email;
+	protected String phone;
+	
+
 }

@@ -7,8 +7,8 @@ import java.util.PrimitiveIterator.OfDouble;
 
 import javax.swing.JOptionPane;
 
-import edu.iut.app.ExamEvent;
-import edu.iut.gui.modele.ModeleExam;
+import edu.iut.gui.modele.ModeleExamEvent;
+import edu.iut.gui.modele.ListeExamEvent;
 import edu.iut.gui.widget.vue.VueCreerExam;
 
 /**
@@ -116,17 +116,17 @@ public class ControlCreerExam implements ActionListener {
 			}
 			break;
 		case "Créer" :
-			ExamEvent exam=new ExamEvent(new Date((Integer) vue.getDateSpinner().getValue(), vue.getMonthCombo().getSelectedIndex(), vue.getNumDaysCombo().getSelectedIndex()), vue.getSelectEtudiant(), vue.getSelectJury(), vue.getSelectClassroom(), vue.getSelectDocument());
+			ModeleExamEvent exam=new ModeleExamEvent(new Date((Integer) vue.getDateSpinner().getValue(), vue.getMonthCombo().getSelectedIndex(), vue.getNumDaysCombo().getSelectedIndex(), (Integer) vue.getHeureCombo().getSelectedItem(), 0), vue.getSelectEtudiant(), vue.getSelectJury(), vue.getSelectClassroom(), vue.getSelectDocument());
 			if(modification!=-1) {
 				if(JOptionPane.showConfirmDialog(null, "Êtes-vous sûr de vouloir modifier l'examen ?", "Confirmation", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
-					ModeleExam.instance().remove(vue.getExamArray().get(modification));
-					ModeleExam.instance().add(exam);
+					ListeExamEvent.instance().remove(vue.getExamArray().get(modification));
+					ListeExamEvent.instance().add(exam);
 					vue.initialiserExamList();
 					vue.showExamList();
 				}
 			}
 			else if(JOptionPane.showConfirmDialog(null, "Êtes-vous sûr de vouloir créer l'examen ?", "Confirmation", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
-				ModeleExam.instance().add(exam);
+				ListeExamEvent.instance().add(exam);
 				vue.initialiserExamList();
 				vue.showExamList();
 			}

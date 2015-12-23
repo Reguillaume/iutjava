@@ -14,8 +14,8 @@ import javax.swing.JTextField;
 import edu.iut.gui.control.ControlCreerClassroom;
 
 /**
- * Classe permettant d'afficher des widgets pour créer une salle de classe.
- * @see Classroom
+ * Classe permettant d'afficher des widgets pour crï¿½er une salle de classe.
+ * @see ModeleClassroom
  * @author Guizmo
  *
  */
@@ -26,7 +26,7 @@ public class VueCreerClassroom extends JPanel {
 	private JTextField nomField;
 	
 	/**
-	 * Bouton pour créer la salle de classe à partir du champ de texte.
+	 * Bouton pour crï¿½er la salle de classe ï¿½ partir du champ de texte.
 	 */
 	private JButton creerButton;
 	

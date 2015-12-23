@@ -3,27 +3,23 @@ package edu.iut.gui.modele;
 import java.util.ArrayList;
 import java.util.Date;
 
-import edu.iut.app.Classroom;
-import edu.iut.app.Document;
-import edu.iut.app.ExamEvent;
-import edu.iut.app.Person;
-import edu.iut.app.Person.PersonFunction;
-import edu.iut.gui.modele.ModeleClassroom;
-import edu.iut.gui.modele.ModeleDocument;
-import edu.iut.gui.modele.ModelePerson;
+import edu.iut.gui.modele.ListeClassroom;
+import edu.iut.gui.modele.ListeDocument;
+import edu.iut.gui.modele.ListePerson;
+import edu.iut.gui.modele.ModelePerson.PersonFunction;
 
 /**
  * Classe permettant de stocker tous les examens.
- * @see ExamEvent
+ * @see ModeleExamEvent
  * @author Guizmo
  *
  */
-public class ModeleExam extends ArrayList<ExamEvent> {
-	private static ModeleExam agenda=null;
+public class ListeExamEvent extends ArrayList<ModeleExamEvent> {
+	private static ListeExamEvent agenda=null;
 	
-	static public ModeleExam instance() {
+	static public ListeExamEvent instance() {
 		if(agenda==null) {
-			agenda=new ModeleExam();/*
+			agenda=new ListeExamEvent();/*
 			//On ajoute un exam pour tester
 			Date date=new Date();
 			Person student=new Person(PersonFunction.STUDENT, "Zidane", "Zinédine", "zidane.zinedine@super-star.foot", "010101");

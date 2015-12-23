@@ -5,11 +5,11 @@ import java.util.ArrayList;
 
 import java.util.Date;
 
-import edu.iut.app.ExamEvent;
+import edu.iut.gui.modele.ModeleExamEvent;
 
 /**
  * Classe permettant de filtrer les examens par date.
- * @see ExamEvent
+ * @see ModeleExamEvent
  * @see java.util.Date
  * @author Guizmo
  *
@@ -18,10 +18,10 @@ public class CritereDate implements Critere{
 	private Date date;
 	
 	@Override
-	public ArrayList<ExamEvent> meetCritere(ArrayList<ExamEvent> ex) {
-		ArrayList<ExamEvent> newEx=new ArrayList<ExamEvent>();
+	public ArrayList<ModeleExamEvent> meetCritere(ArrayList<ModeleExamEvent> ex) {
+		ArrayList<ModeleExamEvent> newEx=new ArrayList<ModeleExamEvent>();
 		
-		for(ExamEvent e : ex) {
+		for(ModeleExamEvent e : ex) {
 			if(e.getExamDate().equals(date)) newEx.add(e);
 		}
 		return newEx;

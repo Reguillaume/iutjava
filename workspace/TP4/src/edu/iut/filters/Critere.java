@@ -2,14 +2,14 @@ package edu.iut.filters;
 
 import java.util.ArrayList;
 
-import edu.iut.app.ExamEvent;
+import edu.iut.gui.modele.ModeleExamEvent;
 
 /**
  * Interface pour filtrer un examen.
- * @see ExamEvent
+ * @see ModeleExamEvent
  * @author Guizmo
  *
  */
 public interface Critere {
-	public ArrayList<ExamEvent> meetCritere(ArrayList<ExamEvent> ex);
+	public ArrayList<ModeleExamEvent> meetCritere(ArrayList<ModeleExamEvent> ex);
 }

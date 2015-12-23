@@ -7,4 +7,5 @@ edu.iut.gui.listeners
 edu.iut.gui.modele
 edu.iut.gui.widget.agenda
 edu.iut.gui.widget.vue
+edu.iut.io
 edu.iut.tools

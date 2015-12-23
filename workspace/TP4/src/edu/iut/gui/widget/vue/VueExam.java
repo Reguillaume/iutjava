@@ -6,18 +6,18 @@ import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import edu.iut.app.Document;
-import edu.iut.app.ExamEvent;
-import edu.iut.app.Person;
+import edu.iut.gui.modele.ModeleDocument;
+import edu.iut.gui.modele.ModeleExamEvent;
+import edu.iut.gui.modele.ModelePerson;
 
 /**
  * Classe permettant d'afficher un examen.
- * @see ExamEvent
+ * @see ModeleExamEvent
  * @author Guizmo
  *
  */
 public class VueExam extends JPanel {	
-	public VueExam(ExamEvent exam) {
+	public VueExam(ModeleExamEvent exam) {
 		//DATE
 		JPanel dateBorderPanel=new JPanel(new BorderLayout());
 		dateBorderPanel.add(new JLabel("DATE"), BorderLayout.NORTH);
@@ -35,7 +35,7 @@ public class VueExam extends JPanel {
 		JPanel juryBorderPanel=new JPanel(new BorderLayout());
 		juryBorderPanel.add(new JLabel("JURYS"), BorderLayout.NORTH);
 		JPanel juryGridPanel=new JPanel(new GridLayout(exam.getJury().size(), 1));
-		for(Person j : exam.getJury()) juryGridPanel.add(new VuePerson(j));
+		for(ModelePerson j : exam.getJury()) juryGridPanel.add(new VuePerson(j));
 		juryBorderPanel.add(juryGridPanel, BorderLayout.CENTER);
 		
 		//CLASSROOM
@@ -50,7 +50,7 @@ public class VueExam extends JPanel {
 		JPanel docBorderPanel=new JPanel(new BorderLayout());
 		docBorderPanel.add(new JLabel("DOCUMENTS"), BorderLayout.NORTH);
 		JPanel docGridPanel=new JPanel(new GridLayout(exam.getDocuments().size(), 1));
-		for(Document d : exam.getDocuments()) docGridPanel.add(new JLabel(d.getDocumentURI()));
+		for(ModeleDocument d : exam.getDocuments()) docGridPanel.add(new JLabel(d.getDocumentURI()));
 		docBorderPanel.add(docGridPanel, BorderLayout.CENTER);
 		
 		//MISE EN FORME

@@ -5,10 +5,10 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
-import edu.iut.app.Person;
-import edu.iut.app.Person.PersonFunction;
 import edu.iut.gui.widget.vue.VueTabPerson;
+import edu.iut.gui.modele.ListePerson;
 import edu.iut.gui.modele.ModelePerson;
+import edu.iut.gui.modele.ModelePerson.PersonFunction;
 
 /**
  * Contrôleur permettant de gérer le panel pour créer une personne.
@@ -28,17 +28,17 @@ public class ControlTabPerson implements ActionListener {
 		switch(e.getActionCommand()) {
 		case "Créer" :
 			String msg;
-			Person person=null;
+			ModelePerson person=null;
 			if(vue.getFonctionBox().getSelectedItem()==PersonFunction.JURY.toString()) {
 				msg="Êtes-vous sûr de vouloir créer le jury "+vue.getNomField().getText()+" "+vue.getPrenomField().getText()+" ?";
-				person=new Person(PersonFunction.JURY, vue.getNomField().getText(), vue.getPrenomField().getText(), vue.getEmailField().getText(), vue.getPhoneField().getText());
+				person=new ModelePerson(PersonFunction.JURY, vue.getNomField().getText(), vue.getPrenomField().getText(), vue.getEmailField().getText(), vue.getPhoneField().getText());
 			}
 			else {
 				msg="Êtes-vous sûr de vouloir créer l'étudiant "+vue.getNomField().getText()+" "+vue.getPrenomField().getText()+" ?";
-				person=new Person(PersonFunction.STUDENT, vue.getNomField().getText(), vue.getPrenomField().getText(), vue.getEmailField().getText(), vue.getPhoneField().getText());
+				person=new ModelePerson(PersonFunction.STUDENT, vue.getNomField().getText(), vue.getPrenomField().getText(), vue.getEmailField().getText(), vue.getPhoneField().getText());
 			}
 			if(JOptionPane.showConfirmDialog(null, msg, "Confirmation", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
-				ModelePerson.instance().add(person);
+				ListePerson.instance().add(person);
 				vue.initialiserListe();
 				vue.listePage();
 				vue.nettoyerChampsCreer();

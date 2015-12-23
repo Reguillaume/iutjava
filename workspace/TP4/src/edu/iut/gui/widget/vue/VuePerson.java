@@ -5,16 +5,16 @@ import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import edu.iut.app.Person;
+import edu.iut.gui.modele.ModelePerson;
 
 /**
- * Classe permettant d'afficher un jury ou un étudiant.
- * @see Person
+ * Classe permettant d'afficher un jury ou un ï¿½tudiant.
+ * @see ModelePerson
  * @author Guizmo
  *
  */
 public class VuePerson extends JPanel {
-	public VuePerson(Person p) {
+	public VuePerson(ModelePerson p) {
 		setLayout(new GridLayout(5, 2));
 		add(new JLabel("fonction"));
 		add(new JLabel(p.getFunction().name()));
