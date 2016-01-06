@@ -5,7 +5,11 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
+/**
+ * Classe permettant de créer une connection à une base de données et d'envoyer des requêtes et recevoir les résultats.
+ * @author guillaumemartinez
+ *
+ */
 public class BD {
 	
 	public static Connection connexion(String url) {

@@ -4,6 +4,11 @@ import java.awt.event.ActionListener;
 
 import vue.VueNbStageParZone;
 
+/**
+ * Classe controlant la vue "Zone"
+ * @author guillaumemartinez
+ *
+ */
 public class ControlVueStageZone implements ActionListener {
 	private VueNbStageParZone vue;
 	

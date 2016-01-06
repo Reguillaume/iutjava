@@ -7,6 +7,11 @@ import javax.swing.JTabbedPane;
 
 import BD.BD;
 
+/**
+ * Classe regroupant toutes les vues dans des onglets sous forme de JPanel.
+ * @author guillaumemartinez
+ *
+ */
 public class VueMain extends JPanel {
 	private static final long serialVersionUID = 1L;
 

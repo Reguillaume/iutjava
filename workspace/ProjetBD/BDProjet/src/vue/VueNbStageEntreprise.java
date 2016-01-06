@@ -14,17 +14,22 @@ import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
-
 import control.ControlVueStageEntreprise;
 import oracle.jdbc.OracleCallableStatement;
 import oracle.jdbc.OracleTypes;
 
+/**
+ * Classe permettant d'afficher les informations des entreprises.
+ * @author guillaumemartinez
+ *
+ */
 public class VueNbStageEntreprise extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	private Connection co;
 	
 	private JSpinner anneeSpinner;
+	private JLabel descLabel=new JLabel();
 	private JLabel resNbStagiaire=new JLabel();
 	private JLabel resNbMoyStagiaire=new JLabel();
 	private JLabel resStagiaire=new JLabel();
@@ -48,8 +53,9 @@ public class VueNbStageEntreprise extends JPanel {
 		resPanel.add(resNbMoyStagiaire);
 		resPanel.add(resStagiaire);
 		
-		setLayout(new GridLayout(2, 1));
+		setLayout(new GridLayout(3, 1));
 		add(spinnerPanel);
+		add(descLabel);
 		add(resPanel);
 	}
 	
@@ -109,5 +115,13 @@ public class VueNbStageEntreprise extends JPanel {
 			e.printStackTrace();
 		}
 		resStagiaire.setText(res);
+	}
+	
+	public void setTextDesc(String text) {
+		descLabel.setText(text);
+	}
+
+	public JSpinner getAnneeSpinner() {
+		return anneeSpinner;
 	}
 }

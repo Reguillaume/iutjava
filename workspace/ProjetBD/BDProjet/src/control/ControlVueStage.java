@@ -5,6 +5,11 @@ import java.awt.event.ActionListener;
 
 import vue.VueNbStage;
 
+/**
+ * Classe controlant la vue "Etudiant"
+ * @author guillaumemartinez
+ *
+ */
 public class ControlVueStage implements ActionListener {
 	private VueNbStage vue;
 	

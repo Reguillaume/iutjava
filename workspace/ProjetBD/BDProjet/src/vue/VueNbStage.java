@@ -15,6 +15,11 @@ import javax.swing.SpinnerNumberModel;
 
 import control.ControlVueStage;
 
+/**
+ * Classe permettant d'afficher les informations sur les étudiants.
+ * @author guillaumemartinez
+ *
+ */
 public class VueNbStage extends JPanel {
 	private static final long serialVersionUID = 1L;
 
