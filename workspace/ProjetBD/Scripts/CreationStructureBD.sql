@@ -2,6 +2,7 @@
 drop table ob_stage;
 drop table ob_entreprise;
 drop table ob_etudiant;
+drop table statistiques;
 drop type ob_stage_ty;
 drop type ob_etudiant_ty;
 drop type ob_entreprise_ty;
@@ -11,6 +12,7 @@ create or replace type ob_etudiant_ty as object (
 id number,
 nom varchar(20),
 prenom varchar(20),
+anneeInscription number,
 map member function tri return number );
 /
 
@@ -44,8 +46,8 @@ create or replace type ob_stage_ty as object (
 id number,
 dateDebut date,
 dateFin date,
-etudiant ob_etudiant_ty,
-entreprise ob_entreprise_ty,
+etudiant ref ob_etudiant_ty,
+entreprise ref ob_entreprise_ty,
 map member function tri return number );
 /
 
@@ -65,4 +67,7 @@ create table ob_entreprise of ob_entreprise_ty(id primary key);
 /
 
 create table ob_stage of ob_stage_ty(id primary key);
+/
+
+create table Statistiques(nbEtudiantAvecStage number, nbEtudiantSansStage number);
 /

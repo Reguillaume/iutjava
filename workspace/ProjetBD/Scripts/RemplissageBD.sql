@@ -2,6 +2,7 @@
 DELETE FROM ob_entreprise;
 DELETE FROM ob_etudiant;
 DELETE FROM ob_stage;
+DELETE FROM STATISTIQUES;
 
 --Remplissage de la table entreprise.
 INSERT INTO ob_entreprise
@@ -33,46 +34,46 @@ VALUES(9,'Netysoft', 'Bievres', 'Essonne');
 
 --Remplissage de la table etudiant.
 INSERT INTO ob_etudiant
-VALUES(1, 'ZAPATO', 'Michel');
+VALUES(1, 'ZAPATO', 'Michel', 2015);
 
 INSERT INTO ob_etudiant
-VALUES(2, 'DAGOBERT', 'Didier');
+VALUES(2, 'DAGOBERT', 'Didier', 2016);
 
 INSERT INTO ob_etudiant
-VALUES(3, 'BOMBUT', 'Tristan');
+VALUES(3, 'BOMBUT', 'Tristan', 2015);
 
 INSERT INTO ob_etudiant
-VALUES(4, 'HIERNE', 'Jerome');
+VALUES(4, 'HIERNE', 'Jerome', 2015);
 
 INSERT INTO ob_etudiant
-VALUES(5 , 'BOMBUT', 'Christian');
+VALUES(5 , 'BOMBUT', 'Christian', 2015);
 
 INSERT INTO ob_etudiant
-VALUES(6, 'PAQUITO', 'Ernesto');
+VALUES(6, 'PAQUITO', 'Ernesto', 2016);
 
 INSERT INTO ob_etudiant
-VALUES(7, 'TRILARD', 'Thibaud');
+VALUES(7, 'TRILARD', 'Thibaud', 2016);
 
 INSERT INTO ob_etudiant
-VALUES(8, 'FERASSE', 'Leonard');
+VALUES(8, 'FERASSE', 'Léonard', 2016);
 
 INSERT INTO ob_etudiant
-VALUES(9, 'BALET', 'Robert');
+VALUES(9, 'BALET', 'Robert', 2016);
 
 INSERT INTO ob_etudiant
-VALUES(10, 'VALEMONTRE', 'Arthur');
+VALUES(10, 'VALEMONTRE', 'Arthur', 2016);
 
 INSERT INTO ob_etudiant
-VALUES ('11', 'HENRY', 'Thierry');
+VALUES ('11', 'HENRY', 'Thierry', 2016);
 
 INSERT INTO ob_etudiant
-VALUES ('12', 'BOND', 'James');
+VALUES ('12', 'BOND', 'James', 2016);
 
 INSERT INTO ob_etudiant
-VALUES ('13', 'POGBA', 'Paul');
+VALUES ('13', 'POGBA', 'Paul', 2016);
 
 INSERT INTO ob_etudiant
-VALUES ('14', 'AURIER', 'Serge');
+VALUES ('14', 'AURIER', 'Serge', 2016);
 
 --Remplissage de la table stage
 INSERT INTO ob_stage
@@ -130,8 +131,11 @@ WHERE et.nom='BALET' AND et.prenom='Robert'
 AND en.nom='Route des Hommes';
 
 INSERT INTO ob_stage
-SELECT 9, TO_DATE('12/01/2016','DD/MM/YY'), TO_DATE('12/03/2016','DD/MM/YY'), ref(et), ref(en)
+SELECT 10, TO_DATE('12/01/2016','DD/MM/YY'), TO_DATE('12/03/2016','DD/MM/YY'), ref(et), ref(en)
 FROM ob_etudiant et, ob_entreprise en
 WHERE et.nom='VALEMONTRE' AND et.prenom='Arthur'
 AND en.nom='Netysoft';
 
+--Remplissage de la table statistiques
+insert into statistiques
+values(nbEtudiantAvecStage(), NBETUDIANTSANSSTAGE());
